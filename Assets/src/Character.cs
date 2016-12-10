@@ -2,11 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CharacterController : MonoBehaviour {
+public class Character : MonoBehaviour {
 
 	public float speed = 0.2f;
 	Rigidbody2D body;
-	Vector3 input;
 
 	// Use this for initialization
 	void Start () {
@@ -15,15 +14,13 @@ public class CharacterController : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-
-		input = new Vector3 (Input.GetAxis ("Horizontal"), Input.GetAxis ("Vertical"));
-
+		
 		Move ();
 
 	}
 
 	void Move () {
-		body.velocity = input*speed;
+		
 
 	}
 }
