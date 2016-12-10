@@ -27,9 +27,9 @@ public class Enemy : Character {
 			new Vector2 (Random.Range (-40, 40), Random.Range (-40, 40)) : nextWaypoint;
 
 		if(Vector3.Distance(transform.position, playerPosition) <= minPlayerDistance)
-			this.SetDirection (transform.InverseTransformPoint (playerPosition).normalized);
+			this.SetMoveDirection (transform.InverseTransformPoint (playerPosition).normalized);
 		else
-			this.SetDirection (transform.InverseTransformPoint (nextWaypoint).normalized);
+			this.SetMoveDirection (transform.InverseTransformPoint (nextWaypoint).normalized);
 
 		if (canAttack && Vector3.Distance (transform.position, playerPosition) < attackRange) {
 			GameManager.SendPlayerHit (new HitInfo (1));
