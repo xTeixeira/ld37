@@ -48,5 +48,4 @@ public class Character : MonoBehaviour {
 
 		animator.SetBool (currentAxis, true);
 	}
-
 }
