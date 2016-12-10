@@ -320,8 +320,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 14eae2751f0c045a697c2a4a4e721ad2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  life: 10
   speed: 20
-  direction: {x: 0, y: 0}
   aim: {fileID: 654665410}
 --- !u!1 &2119409358
 GameObject:
@@ -353,8 +353,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6015b09485d66493f8153f980534aeba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  life: 0
   speed: 5
-  direction: {x: 0, y: 0}
+  minPlayerDistance: 15
+  attackRange: 10
+  attackSecondsDelay: 1
 --- !u!61 &2119409360
 BoxCollider2D:
   m_ObjectHideFlags: 0

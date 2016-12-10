@@ -4,19 +4,19 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour {
 
-	public static GameObject player;
+	public static Player player;
 
 	// Use this for initialization
 	void Start () {
-		player = player == null ? GameObject.Find ("Player") : player;
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
+		player = player == null ? GameObject.Find ("Player").GetComponent<Player>() : player;
 	}
 
 	public static Vector3 GetPlayerPosition(){
-		return player.transform.position;
+		player = player == null ? GameObject.Find ("Player").GetComponent<Player>() : player;
+		return player.gameObject.transform.position;
+	}
+
+	public static void SendPlayerHit(HitInfo hitInfo){
+		player.SendHit (hitInfo);
 	}
 }

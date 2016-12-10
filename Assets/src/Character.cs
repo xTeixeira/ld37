@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Character : MonoBehaviour {
 
+	public float life;
 	public float speed;
 	Vector2 direction;
 	Rigidbody2D rigidBody;
@@ -19,5 +20,9 @@ public class Character : MonoBehaviour {
 
 	protected void SetDirection (Vector2 direction){
 		this.direction = direction;
+	}
+
+	public void SendHit(HitInfo hit){
+		life -= hit.damage;
 	}
 }
