@@ -5,7 +5,7 @@ using UnityEngine;
 public class Character : MonoBehaviour {
 
 	public float speed;
-	public Vector3 direction;
+	Vector2 direction;
 	Rigidbody2D rigidBody;
 
 	// Use this for initialization
@@ -15,5 +15,9 @@ public class Character : MonoBehaviour {
 
 	protected void HandleMovement () {
 		rigidBody.velocity = (direction * speed);
+	}
+
+	protected void SetDirection (Vector2 dir){
+		this.direction = dir;
 	}
 }
