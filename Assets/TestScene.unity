@@ -191,7 +191,7 @@ GameObject:
   - component: {fileID: 1844725147}
   - component: {fileID: 1844725151}
   m_Layer: 0
-  m_Name: testsprite
+  m_Name: Player
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -287,7 +287,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 1844725146}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fbcf086c4073246c0bf59c27757bbd43, type: 3}
+  m_Script: {fileID: 11500000, guid: 14eae2751f0c045a697c2a4a4e721ad2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 20
+  speed: 0
+  direction: {x: 0, y: 0, z: 0}
