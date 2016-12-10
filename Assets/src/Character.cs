@@ -34,7 +34,6 @@ public class Character : MonoBehaviour {
 
 		string currentAxis = "down";
 		float directionAngle = Vector2.Angle (Vector2.up, oriDirection);
-		print (directionAngle);
 
 		if (directionAngle <= 45)
 			currentAxis = "up";
@@ -43,8 +42,10 @@ public class Character : MonoBehaviour {
 		else
 			currentAxis = "down";
 
-		foreach (AnimatorControllerParameter parameter in animator.parameters)
-			animator.SetBool(parameter.name, false);
+		foreach (AnimatorControllerParameter parameter in animator.parameters) {
+			if (!parameter.name.Equals (currentAxis))
+				animator.SetBool (parameter.name, false);
+		}
 
 		animator.SetBool (currentAxis, true);
 	}
