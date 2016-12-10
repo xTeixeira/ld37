@@ -8,6 +8,7 @@ public class Character : MonoBehaviour {
 	public float speed;
 	Vector2 moveDirection;
 	Rigidbody2D rigidBody;
+	public float oriAngle;
 
 	// Use this for initialization
 	protected void InitCharacter () {
@@ -26,5 +27,11 @@ public class Character : MonoBehaviour {
 		life -= hit.damage;
 	}
 
-	protected void HandleOrientation (
+	protected void HandleOrientation (Vector2 oriDirection){
+
+		oriAngle = Vector2.Angle (new Vector2(1.0f, 0.0f), oriDirection);
+
+
+	}
+
 }

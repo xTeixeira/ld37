@@ -13,9 +13,10 @@ public class Player : Character {
 
 	// Update is called once per frame
 	void Update () {
-		this.SetDirection (new Vector2 (Input.GetAxis ("Horizontal"), Input.GetAxis ("Vertical")));
+		this.SetMoveDirection (new Vector2 (Input.GetAxis ("Horizontal"), Input.GetAxis ("Vertical")));
 		this.HandleMovement ();
 		this.HandleAim ();
+		this.HandleOrientation (aim.transform.up);
 
 	}
 
@@ -26,7 +27,6 @@ public class Player : Character {
 		mouse_pos.y = mouse_pos.y - object_pos.y;
 		float angle = (Mathf.Atan2(mouse_pos.y, mouse_pos.x) * Mathf.Rad2Deg)+90;
 		aim.transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle));
-
 	}
 		
 }
