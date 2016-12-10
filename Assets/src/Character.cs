@@ -4,23 +4,21 @@ using UnityEngine;
 
 public class Character : MonoBehaviour {
 
-	public float speed = 0.2f;
-	Rigidbody2D body;
+	public float speed;
+	public Vector3 direction;
+	Rigidbody2D rigidBody;
 
 	// Use this for initialization
 	void Start () {
-		body = GetComponent<Rigidbody2D> ();
+		rigidBody = GetComponent<Rigidbody2D> ();
 	}
 	
 	// Update is called once per frame
-	void Update () {
-		
+	void Update () {		
 		Move ();
-
 	}
 
 	void Move () {
-		
-
+		rigidBody.velocity = (direction * speed);
 	}
 }
