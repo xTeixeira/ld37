@@ -6,7 +6,7 @@ public class Character : MonoBehaviour {
 
 	public float life;
 	public float speed;
-	Vector2 direction;
+	Vector2 moveDirection;
 	Rigidbody2D rigidBody;
 
 	// Use this for initialization
@@ -15,14 +15,16 @@ public class Character : MonoBehaviour {
 	}
 
 	protected void HandleMovement () {
-		rigidBody.velocity = (direction * speed);
+		rigidBody.velocity = (moveDirection * speed);
 	}
 
-	protected void SetDirection (Vector2 direction){
-		this.direction = direction;
+	protected void SetMoveDirection (Vector2 direction){
+		this.moveDirection = direction;
 	}
 
 	public void SendHit(HitInfo hit){
 		life -= hit.damage;
 	}
+
+	protected void HandleOrientation (
 }
