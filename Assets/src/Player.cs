@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Player : Character {
 
+	public GameObject aim;
 
 	// Use this for initialization
 	void Start () {
@@ -20,11 +21,11 @@ public class Player : Character {
 
 	void HandleAim () {
 		Vector3 mouse_pos = Input.mousePosition;
-		Vector3 object_pos = Camera.main.WorldToScreenPoint(this.transform.position);
+		Vector3 object_pos = Camera.main.WorldToScreenPoint(aim.transform.position);
 		mouse_pos.x = mouse_pos.x - object_pos.x;
 		mouse_pos.y = mouse_pos.y - object_pos.y;
-		float angle = Mathf.Atan2(mouse_pos.y, mouse_pos.x) * Mathf.Rad2Deg;
-		transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle));
+		float angle = (Mathf.Atan2(mouse_pos.y, mouse_pos.x) * Mathf.Rad2Deg)+90;
+		aim.transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle));
 
 	}
 		
