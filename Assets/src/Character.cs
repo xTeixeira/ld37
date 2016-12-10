@@ -9,16 +9,11 @@ public class Character : MonoBehaviour {
 	Rigidbody2D rigidBody;
 
 	// Use this for initialization
-	void Start () {
+	protected void InitCharacter () {
 		rigidBody = GetComponent<Rigidbody2D> ();
 	}
-	
-	// Update is called once per frame
-	void Update () {		
-		Move ();
-	}
 
-	void Move () {
+	protected void HandleMovement () {
 		rigidBody.velocity = (direction * speed);
 	}
 }
