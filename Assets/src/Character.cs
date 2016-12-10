@@ -26,5 +26,4 @@ public class Character : MonoBehaviour {
 		life -= hit.damage;
 	}
 
-	protected void HandleOrientation (
 }
