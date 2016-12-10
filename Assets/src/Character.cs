@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System;
 using UnityEngine;
 
 public class Character : MonoBehaviour {
@@ -8,6 +9,8 @@ public class Character : MonoBehaviour {
 	public float speed;
 	Vector2 moveDirection;
 	Rigidbody2D rigidBody;
+
+	public Animator animator; 
 	public float oriAngle;
 
 	// Use this for initialization
@@ -29,9 +32,21 @@ public class Character : MonoBehaviour {
 
 	protected void HandleOrientation (Vector2 oriDirection){
 
-		oriAngle = Vector2.Angle (new Vector2(1.0f, 0.0f), oriDirection);
+		string currentAxis = "down";
+		float directionAngle = Vector2.Angle (Vector2.up, oriDirection);
+		print (directionAngle);
 
+		if (directionAngle <= 45)
+			currentAxis = "up";
+		else if (directionAngle <= 145)
+			currentAxis = oriDirection.x > 0 ? "right" : "left";
+		else
+			currentAxis = "down";
 
+		foreach (AnimatorControllerParameter parameter in animator.parameters)
+			animator.SetBool(parameter.name, false);
+
+		animator.SetBool (currentAxis, true);
 	}
 
 }
