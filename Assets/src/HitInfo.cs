@@ -1,4 +1,5 @@
-﻿public class HitInfo {
+﻿[System.Serializable]
+public class HitInfo {
 	public float damage;
 
 	public HitInfo(float damage){

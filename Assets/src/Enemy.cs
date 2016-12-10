@@ -19,6 +19,7 @@ public class Enemy : Character {
 	void Update () {
 		this.HandleAI ();
 		this.HandleMovement ();
+		this.HandleLife ();
 	}
 
 	void HandleAI () {
@@ -36,6 +37,11 @@ public class Enemy : Character {
 			StartCoroutine (AttackCooldown ());
 		}
 			
+	}
+
+	void HandleLife(){
+		if (this.life <= 0)
+			Destroy (gameObject);
 	}
 
 	IEnumerator AttackCooldown(){

@@ -4,7 +4,14 @@ using UnityEngine;
 
 public class AimColliderListener : MonoBehaviour {
 
+	Player player;
+
 	void OnTriggerStay2D (Collider2D col) {
-		Destroy (col.gameObject);
+		player = player == null ? GameManager.GetPlayer() : player;
+
+		if (col.gameObject.CompareTag ("Enemy")) {
+			if (player.IsAttacking ())
+				col.gameObject.GetComponent<Enemy> ().SendHit (player.GetCurrentHitInfo ());
+		}
 	}
 }

@@ -6,6 +6,8 @@ public class Player : Character {
 
 	public GameObject aim;
 
+	private bool isAttacking;
+
 	// Use this for initialization
 	void Start () {
 		this.InitCharacter ();
@@ -17,7 +19,7 @@ public class Player : Character {
 		this.HandleMovement ();
 		this.HandleAim ();
 		this.HandleOrientation (aim.transform.up);
-
+		this.HandleAttack ();
 	}
 
 	void HandleAim () {
@@ -28,5 +30,17 @@ public class Player : Character {
 		float angle = (Mathf.Atan2(mouse_pos.y, mouse_pos.x) * Mathf.Rad2Deg)-90;
 		aim.transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle));
 	}
-		
+
+	void HandleAttack() {
+		if(Input.GetButtonDown("Fire1"))
+			isAttacking = true;
+	}
+
+	public bool IsAttacking() {
+		if(isAttacking) {
+			isAttacking = false;
+			return true;
+		}
+		return false;
+	}		
 }

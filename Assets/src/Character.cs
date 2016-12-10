@@ -10,8 +10,10 @@ public class Character : MonoBehaviour {
 	Vector2 moveDirection;
 	Rigidbody2D rigidBody;
 
+	public Weapon currentWeapon;
+	public GameObject hitParticle;
 	public Animator animator; 
-	public float oriAngle;
+	float oriAngle;
 
 	// Use this for initialization
 	protected void InitCharacter () {
@@ -28,6 +30,8 @@ public class Character : MonoBehaviour {
 
 	public void SendHit(HitInfo hit){
 		life -= hit.damage;
+		if(hitParticle != null)
+			Instantiate (hitParticle, transform.position, Quaternion.identity);
 	}
 
 	protected void HandleOrientation (Vector2 oriDirection){
@@ -48,5 +52,9 @@ public class Character : MonoBehaviour {
 		}
 
 		animator.SetBool (currentAxis, true);
+	}
+		
+	public HitInfo GetCurrentHitInfo() {
+		return currentWeapon.GetHitInfo();
 	}
 }

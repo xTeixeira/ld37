@@ -6,7 +6,6 @@ public class GameManager : MonoBehaviour {
 
 	public static Player player;
 
-	// Use this for initialization
 	void Start () {
 		player = player == null ? GameObject.Find ("Player").GetComponent<Player>() : player;
 	}
@@ -18,5 +17,9 @@ public class GameManager : MonoBehaviour {
 
 	public static void SendPlayerHit(HitInfo hitInfo){
 		player.SendHit (hitInfo);
+	}
+
+	public static Player GetPlayer(){
+		return player;
 	}
 }
