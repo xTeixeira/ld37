@@ -214,7 +214,7 @@ Prefab:
         type: 2}
     - target: {fileID: 1138311359644334, guid: 72edbd64866db41f9bbee94876567b61, type: 2}
       propertyPath: m_TagString
-      value: Player
+      value: Untagged
       objectReference: {fileID: 0}
     - target: {fileID: 1640477832157066, guid: 72edbd64866db41f9bbee94876567b61, type: 2}
       propertyPath: m_TagString
@@ -223,6 +223,16 @@ Prefab:
     - target: {fileID: 1455626516931600, guid: 72edbd64866db41f9bbee94876567b61, type: 2}
       propertyPath: m_TagString
       value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 58271859846931200, guid: 72edbd64866db41f9bbee94876567b61,
+        type: 2}
+      propertyPath: m_Radius
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 212479047893560828, guid: 72edbd64866db41f9bbee94876567b61,
+        type: 2}
+      propertyPath: m_SortingOrder
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 72edbd64866db41f9bbee94876567b61, type: 2}
@@ -286,7 +296,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemies:
   - {fileID: 1865370300194282, guid: cddb635a87f58407a9b97583b27696bf, type: 2}
-  enemiesPerMinute: 10
+  enemiesPerMinute: 60
 --- !u!4 &459145906
 Transform:
   m_ObjectHideFlags: 0
@@ -371,9 +381,9 @@ GameObject:
   - component: {fileID: 2049244072}
   - component: {fileID: 2049244073}
   - component: {fileID: 2049244074}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: AimCollider
-  m_TagString: Player
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

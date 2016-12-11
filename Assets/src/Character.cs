@@ -12,9 +12,10 @@ public class Character : MonoBehaviour {
 
 	public Weapon meleeWeapon, rangedWeapon;
 	public GameObject hitParticle;
-	public Animator animator; 
-	float oriAngle;
+	public Animator animator;
+
 	protected bool isMeleeAttacking;
+	protected bool canMove = true;
 
 
 	// Use this for initialization
@@ -25,11 +26,16 @@ public class Character : MonoBehaviour {
 	}
 
 	protected void HandleMovement () {
-		rigidBody.velocity = (moveDirection * speed);
+		if(canMove)
+			rigidBody.velocity = (moveDirection * speed);
 	}
 
 	protected void SetMoveDirection (Vector2 direction){
 		this.moveDirection = direction;
+	}
+
+	protected void Move(Vector2 direction){
+		rigidBody.AddForce (direction);
 	}
 
 	public void SendHit(HitInfo hit){
@@ -61,5 +67,4 @@ public class Character : MonoBehaviour {
 	public HitInfo GetCurrentHitInfo() {
 		return meleeWeapon.GetHitInfo();
 	}
-
 }

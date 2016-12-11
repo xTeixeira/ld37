@@ -11,7 +11,7 @@ public class AimColliderListener : MonoBehaviour {
 
 		if (col.gameObject.CompareTag ("Enemy")) {
 			if (player.IsMeleeAttacking ()) {
-				col.gameObject.GetComponent<Enemy> ().SendHit (player.GetCurrentHitInfo ());
+				col.gameObject.GetComponent<Character> ().SendHit (player.GetCurrentHitInfo ());
 
 			}
 		}

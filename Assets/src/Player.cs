@@ -40,7 +40,7 @@ public class Player : Character {
 
 
 		}
-		if (Input.GetButtonDown ("Fire2") && rangedWeapon.ready) {
+		if (Input.GetButton ("Fire2") && rangedWeapon.ready) {
 			animator.SetBool ("attack", true);
 			rangedWeapon.Attack (aim.transform.up);
 		}

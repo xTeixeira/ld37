@@ -102,7 +102,7 @@ CapsuleCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_Offset: {x: -0.032612726, y: -0.7663882}
   m_Size: {x: 2.4743261, y: 1.6767727}
@@ -144,7 +144,6 @@ MonoBehaviour:
   hitParticle: {fileID: 1045274792781816, guid: 38d3ae99fcc7647c0a7d3c02ddd88a5e,
     type: 2}
   animator: {fileID: 95033374740828898}
-  minPlayerDistance: 15
 --- !u!212 &212889185849379978
 SpriteRenderer:
   m_ObjectHideFlags: 1
