@@ -26,6 +26,23 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!1 &1194847321007146
+GameObject:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4691290890376810}
+  - component: {fileID: 70040226048434610}
+  - component: {fileID: 114258569319041376}
+  m_Layer: 8
+  m_Name: AimCollider
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!1 &1330600205228090
 GameObject:
   m_ObjectHideFlags: 0
@@ -39,7 +56,7 @@ GameObject:
   - component: {fileID: 58271859846931200}
   m_Layer: 0
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -56,7 +73,7 @@ GameObject:
   - component: {fileID: 95058575813055950}
   m_Layer: 0
   m_Name: Fire
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -73,7 +90,7 @@ GameObject:
   - component: {fileID: 95710318240740188}
   m_Layer: 0
   m_Name: Sprite
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -123,6 +140,19 @@ Transform:
   m_Father: {fileID: 4739513859176396}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &4691290890376810
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1194847321007146}
+  m_LocalRotation: {x: 0, y: 0, z: 0.7071068, w: 0.7071068}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4820081845842044}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 90}
 --- !u!4 &4739513859176396
 Transform:
   m_ObjectHideFlags: 1
@@ -148,7 +178,8 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
+  m_Children:
+  - {fileID: 4691290890376810}
   m_Father: {fileID: 4739513859176396}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -234,6 +265,20 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 1.9
+--- !u!70 &70040226048434610
+CapsuleCollider2D:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1194847321007146}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_Offset: {x: 3, y: 0}
+  m_Size: {x: 3, y: 5}
+  m_Direction: 0
 --- !u!81 &81988648939914936
 AudioListener:
   m_ObjectHideFlags: 1
@@ -282,6 +327,17 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
+--- !u!114 &114258569319041376
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1194847321007146}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e96ec8dcbb4f842d2877fd9d0ec0bd4b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114716809246731688
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -295,10 +351,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   life: 10
   speed: 20
-  meleeWeapon: {fileID: 0}
-  rangedWeapon: {fileID: 0}
-  hitParticle: {fileID: 0}
+  meleeWeapon: {fileID: 114383245760894346, guid: 060b072e364b74654903b466e8b10547,
+    type: 2}
+  rangedWeapon: {fileID: 114311536146469756, guid: 438b68e2d31bb4d5bbb469093aeaef7f,
+    type: 2}
+  hitParticle: {fileID: 1045274792781816, guid: 38d3ae99fcc7647c0a7d3c02ddd88a5e,
+    type: 2}
   animator: {fileID: 95710318240740188}
+  renderer: {fileID: 212479047893560828}
+  invulnerableTime: 1.5
+  canBeDamaged: 1
+  invulnerabilityColor: {r: 1, g: 0, b: 0, a: 0.528}
   aim: {fileID: 1138311359644334}
 --- !u!124 &124835411626763330
 Behaviour:
@@ -372,7 +435,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 2
   m_Sprite: {fileID: 21300000, guid: 10b94d4ffe7c343efa0c8946aa8dea3d, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
