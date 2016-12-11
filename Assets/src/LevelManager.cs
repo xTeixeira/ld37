@@ -20,13 +20,13 @@ public class LevelManager : MonoBehaviour {
 		CreateFences ();
 		CreateTombstones ();
 
-		assetsHolder.transform.Translate (Vector3.left * roomSize.x/2 * tileUnitSize);
-		assetsHolder.transform.Translate (Vector3.down * roomSize.y/2 * tileUnitSize);
+		assetsHolder.transform.Translate (Vector3.left * roomSize.x * tileUnitSize);
+		assetsHolder.transform.Translate (Vector3.down * roomSize.y * tileUnitSize);
 	}
 	
 	void CreateTiles (){
-		int tilesSizeX = (int) roomSize.x + 40;
-		int tilesSizeY = (int) roomSize.y + 40;
+		int tilesSizeX = (int) (roomSize.x * tileUnitSize) * 3;
+		int tilesSizeY = (int)(roomSize.y * tileUnitSize) * 3;
 
 		for (int i = 0; i < tilesSizeX; i++) {
 			for (int j = 0; j < tilesSizeY; j++) {
@@ -34,7 +34,6 @@ public class LevelManager : MonoBehaviour {
 				tile.transform.position = (new Vector3 (i * tileUnitSize, 
 					j* tileUnitSize, 
 					0));
-				tile.transform.Rotate (Random.Range (0, 2) == 1 ? Vector3.right : Vector3.zero);
 
 				SpriteRenderer spriteRenderer = tile.AddComponent <SpriteRenderer>();
 				spriteRenderer.sprite = tiles [Random.Range (0, 3)];

@@ -128,7 +128,7 @@ MonoBehaviour:
   tombstones:
   - {fileID: 1046449885237108, guid: 46c43e7016af04cde942e3f7f10522e1, type: 2}
   - {fileID: 1401634108835594, guid: f7747825f676044be9abfec21f30d4ba, type: 2}
-  roomSize: {x: 10, y: 10}
+  roomSize: {x: 15, y: 15}
   tombstonesRandomRange: {x: 5, y: 10}
   tilesHolder: {fileID: 709177401}
   assetsHolder: {fileID: 1600818830}
