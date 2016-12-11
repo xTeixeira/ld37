@@ -9,6 +9,7 @@ public class Weapon : MonoBehaviour {
 	public string weaponName;
 	public float weaponDamage;
 	public WeaponType weaponType;
+	public float cooldown;
 
 	HitInfo hitInfo;
 

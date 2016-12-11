@@ -15,6 +15,8 @@ public class Character : MonoBehaviour {
 	public Animator animator; 
 	float oriAngle;
 
+	public bool canAttack = true;
+
 	// Use this for initialization
 	protected void InitCharacter () {
 		rigidBody = GetComponent<Rigidbody2D> ();
@@ -56,5 +58,11 @@ public class Character : MonoBehaviour {
 		
 	public HitInfo GetCurrentHitInfo() {
 		return currentWeapon.GetHitInfo();
+	}
+
+	public IEnumerator AttackCooldown(){
+		canAttack = false;
+		yield return new WaitForSeconds(currentWeapon.cooldown);
+		canAttack = true;
 	}
 }

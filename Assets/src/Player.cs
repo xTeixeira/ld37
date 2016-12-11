@@ -32,8 +32,10 @@ public class Player : Character {
 	}
 
 	void HandleAttack() {
-		if(Input.GetButtonDown("Fire1"))
+		if (Input.GetButtonDown ("Fire1") && canAttack) {
 			isAttacking = true;
+			StartCoroutine (AttackCooldown ());
+		}
 	}
 
 	public bool IsAttacking() {

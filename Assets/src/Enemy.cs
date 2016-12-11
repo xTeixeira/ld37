@@ -6,9 +6,7 @@ public class Enemy : Character {
 
 	public float minPlayerDistance;
 	public float attackRange;
-	public float attackSecondsDelay;
 
-	bool canAttack = true;
 	Vector2 nextWaypoint;
 	Vector3 playerPosition;
 
@@ -44,9 +42,5 @@ public class Enemy : Character {
 			Destroy (gameObject);
 	}
 
-	IEnumerator AttackCooldown(){
-		canAttack = false;
-		yield return new WaitForSeconds(attackSecondsDelay);
-		canAttack = true;
-	}
+
 }
