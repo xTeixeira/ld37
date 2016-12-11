@@ -10,6 +10,7 @@ public class Weapon : MonoBehaviour {
 	public float weaponDamage;
 	public WeaponType weaponType;
 	public float cooldown;
+	public float range;
 
 	HitInfo hitInfo;
 

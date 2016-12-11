@@ -30,7 +30,7 @@ public class Enemy : Character {
 		else
 			this.SetMoveDirection (transform.InverseTransformPoint (nextWaypoint).normalized);
 
-		if (canAttack && Vector3.Distance (transform.position, playerPosition) < attackRange) {
+		if (canAttack && Vector3.Distance (transform.position, playerPosition) < currentWeapon.range) {
 			GameManager.SendPlayerHit (new HitInfo (1));
 			StartCoroutine (AttackCooldown ());
 		}
@@ -38,7 +38,7 @@ public class Enemy : Character {
 	}
 
 	void HandleLife(){
-		if (this.life <= 0)
+	apo	if (this.life <= 0)
 			Destroy (gameObject);
 	}
 
