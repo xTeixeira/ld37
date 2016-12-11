@@ -16,6 +16,14 @@ public class Character : MonoBehaviour {
 	float oriAngle;
 	protected bool isMeleeAttacking;
 
+	public SpriteRenderer renderer;
+
+	public float invulnerableTime;
+
+	public bool canBeDamaged = true;
+
+	public Color invulnerabilityColor;
+
 
 	// Use this for initialization
 	protected void InitCharacter () {
@@ -33,9 +41,15 @@ public class Character : MonoBehaviour {
 	}
 
 	public void SendHit(HitInfo hit){
-		life -= hit.damage;
-		if(hitParticle != null)
-			Instantiate (hitParticle, transform.position, Quaternion.identity);
+		if (canBeDamaged) {
+			life -= hit.damage;
+			if(hitParticle != null)
+				Instantiate (hitParticle, transform.position, Quaternion.identity);
+
+			StartCoroutine (Invulnerability ());
+		
+		}
+
 	}
 
 	protected void HandleOrientation (Vector2 oriDirection){
@@ -60,6 +74,15 @@ public class Character : MonoBehaviour {
 		
 	public HitInfo GetCurrentHitInfo() {
 		return meleeWeapon.GetHitInfo();
+	}
+		
+
+	IEnumerator Invulnerability(){
+		canBeDamaged = false;
+		renderer.GetComponent<SpriteRenderer>().color = invulnerabilityColor;
+		yield return new WaitForSeconds(invulnerableTime);
+		renderer.GetComponent<SpriteRenderer>().color = new Color (255, 255, 255);
+		canBeDamaged = true;
 	}
 
 }
