@@ -24,11 +24,15 @@ public class Enemy : Character {
 		nextWaypoint = Vector2.Distance (transform.position, nextWaypoint) <= 1 ? 
 			new Vector2 (Random.Range (-40, 40), Random.Range (-40, 40)) : nextWaypoint;
 
-		if(Vector3.Distance(transform.position, playerPosition) <= minPlayerDistance)
-			this.SetMoveDirection (transform.InverseTransformPoint (playerPosition).normalized);
-		else
-			this.SetMoveDirection (transform.InverseTransformPoint (nextWaypoint).normalized);
-
+		if (Vector3.Distance (transform.position, playerPosition) <= minPlayerDistance) {
+			Vector2 direction = transform.InverseTransformPoint (playerPosition).normalized;
+			this.SetMoveDirection (direction);
+			this.HandleOrientation (direction);
+		} else {
+			Vector2 direction = transform.InverseTransformPoint (nextWaypoint).normalized;
+			this.SetMoveDirection (direction);
+			this.HandleOrientation (direction);
+		}
 		if (canAttack && Vector3.Distance (transform.position, playerPosition) < currentWeapon.range) {
 			GameManager.SendPlayerHit (new HitInfo (1));
 			StartCoroutine (AttackCooldown ());
