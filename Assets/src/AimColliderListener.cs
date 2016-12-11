@@ -5,13 +5,15 @@ using UnityEngine;
 public class AimColliderListener : MonoBehaviour {
 
 	Player player;
-	List<Putinho> enemies = new List<Putinho> ();
+	public List<Character> enemies = new List<Character> ();
 
 	void Update() {
 		player = player == null ? GameManager.GetPlayer() : player;
 		if (player.IsMeleeAttacking ()) {
 			foreach (Putinho enemy in enemies){
-				enemy.SendHit (player.GetCurrentHitInfo ());
+				if (enemy != null) {
+					enemy.SendHit (player.GetCurrentHitInfo ());
+				} 
 			}
 		}
 	}
