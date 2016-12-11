@@ -200,6 +200,12 @@ Prefab:
       value: 
       objectReference: {fileID: 1045274792781816, guid: 38d3ae99fcc7647c0a7d3c02ddd88a5e,
         type: 2}
+    - target: {fileID: 114716809246731688, guid: 72edbd64866db41f9bbee94876567b61,
+        type: 2}
+      propertyPath: meleeWeapon
+      value: 
+      objectReference: {fileID: 114383245760894346, guid: 060b072e364b74654903b466e8b10547,
+        type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 72edbd64866db41f9bbee94876567b61, type: 2}
   m_IsPrefabParent: 0
@@ -340,6 +346,12 @@ Prefab:
       propertyPath: m_RootOrder
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 114114877425153104, guid: cddb635a87f58407a9b97583b27696bf,
+        type: 2}
+      propertyPath: meleeWeapon
+      value: 
+      objectReference: {fileID: 114383245760894346, guid: 060b072e364b74654903b466e8b10547,
+        type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: cddb635a87f58407a9b97583b27696bf, type: 2}
   m_IsPrefabParent: 0

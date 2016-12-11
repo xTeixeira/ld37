@@ -11,10 +11,25 @@ public class Weapon : MonoBehaviour {
 	public WeaponType weaponType;
 	public float cooldown;
 	public float range;
+	public bool ready;
 
 	HitInfo hitInfo;
 
-	public HitInfo GetHitInfo(){
+	public HitInfo GetHitInfo() {
 		return new HitInfo(weaponDamage);
+	}
+
+	public bool Attack() {
+		if (ready) {
+			StartCoroutine (AttackCooldown ());
+			return true;
+		}
+		return false;
+	}
+
+	IEnumerator AttackCooldown(){
+		ready = false;
+		yield return new WaitForSeconds(cooldown);
+		ready = true;
 	}
 }

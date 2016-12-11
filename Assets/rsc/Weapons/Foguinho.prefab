@@ -55,4 +55,5 @@ MonoBehaviour:
   weaponDamage: 1
   weaponType: 0
   cooldown: 0.8
-  range: 3
+  range: 4
+  ready: 1

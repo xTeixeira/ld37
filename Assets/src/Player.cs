@@ -6,8 +6,6 @@ public class Player : Character {
 
 	public GameObject aim;
 
-	private bool isAttacking;
-
 	// Use this for initialization
 	void Start () {
 		this.InitCharacter ();
@@ -32,15 +30,15 @@ public class Player : Character {
 	}
 
 	void HandleAttack() {
-		if (Input.GetButtonDown ("Fire1") && canAttack) {
-			isAttacking = true;
-			StartCoroutine (AttackCooldown ());
+		if (Input.GetButtonDown ("Fire1") && meleeWeapon.ready) {
+			this.isMeleeAttacking = meleeWeapon.Attack ();
+
 		}
 	}
 
-	public bool IsAttacking() {
-		if(isAttacking) {
-			isAttacking = false;
+	public bool IsMeleeAttacking() {
+		if(isMeleeAttacking) {
+			isMeleeAttacking = false;
 			return true;
 		}
 		return false;

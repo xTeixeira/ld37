@@ -10,16 +10,16 @@ public class Character : MonoBehaviour {
 	Vector2 moveDirection;
 	Rigidbody2D rigidBody;
 
-	public Weapon currentWeapon;
+	public Weapon meleeWeapon;
 	public GameObject hitParticle;
 	public Animator animator; 
 	float oriAngle;
-
-	public bool canAttack = true;
+	protected bool isMeleeAttacking;
 
 	// Use this for initialization
 	protected void InitCharacter () {
 		rigidBody = GetComponent<Rigidbody2D> ();
+		meleeWeapon = Instantiate (meleeWeapon, transform);
 	}
 
 	protected void HandleMovement () {
@@ -57,12 +57,7 @@ public class Character : MonoBehaviour {
 	}
 		
 	public HitInfo GetCurrentHitInfo() {
-		return currentWeapon.GetHitInfo();
+		return meleeWeapon.GetHitInfo();
 	}
 
-	public IEnumerator AttackCooldown(){
-		canAttack = false;
-		yield return new WaitForSeconds(currentWeapon.cooldown);
-		canAttack = true;
-	}
 }

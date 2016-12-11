@@ -17,6 +17,7 @@ public class Enemy : Character {
 		this.HandleAI ();
 		this.HandleMovement ();
 		this.HandleLife ();
+		this.HandleAttack ();
 	}
 
 	void HandleAI () {
@@ -33,11 +34,16 @@ public class Enemy : Character {
 			this.SetMoveDirection (direction);
 			this.HandleOrientation (direction);
 		}
-		if (canAttack && Vector3.Distance (transform.position, playerPosition) < currentWeapon.range) {
-			GameManager.SendPlayerHit (new HitInfo (1));
-			StartCoroutine (AttackCooldown ());
+		if (Vector3.Distance (transform.position, playerPosition) < meleeWeapon.range) {
+			isMeleeAttacking = meleeWeapon.Attack ();
 		}
 			
+	}
+
+	void HandleAttack (){
+		if (isMeleeAttacking)
+			GameManager.SendPlayerHit (meleeWeapon.GetHitInfo ());
+		isMeleeAttacking = false;
 	}
 
 	void HandleLife(){
