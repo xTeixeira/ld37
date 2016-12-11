@@ -144,10 +144,10 @@ MonoBehaviour:
   hitParticle: {fileID: 1045274792781816, guid: 38d3ae99fcc7647c0a7d3c02ddd88a5e,
     type: 2}
   animator: {fileID: 95033374740828898}
-  renderer: {fileID: 212889185849379978}
+  spriteRenderer: {fileID: 212889185849379978}
   invulnerableTime: 0
   canBeDamaged: 1
-  invulnerabilityColor: {r: 1, g: 1, b: 1, a: 1}
+  invulnerabilityColor: {r: 1, g: 1, b: 1, a: 0.672}
 --- !u!212 &212889185849379978
 SpriteRenderer:
   m_ObjectHideFlags: 1
