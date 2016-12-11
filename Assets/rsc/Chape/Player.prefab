@@ -34,8 +34,8 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4739513859176396}
-  - component: {fileID: 50445619972333076}
   - component: {fileID: 114716809246731688}
+  - component: {fileID: 50445619972333076}
   - component: {fileID: 58271859846931200}
   m_Layer: 0
   m_Name: Player
@@ -295,8 +295,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   life: 10
   speed: 20
+  meleeWeapon: {fileID: 0}
+  rangedWeapon: {fileID: 0}
+  hitParticle: {fileID: 0}
   animator: {fileID: 95710318240740188}
-  oriAngle: 0
   aim: {fileID: 1138311359644334}
 --- !u!124 &124835411626763330
 Behaviour:

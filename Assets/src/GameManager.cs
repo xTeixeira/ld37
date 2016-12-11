@@ -40,7 +40,6 @@ public class GameManager : MonoBehaviour {
 
 	IEnumerator EnemySpawnCooldown (){
 		canSpawnEnemy = false;
-		print (60 / enemiesPerMinute);
 		yield return new WaitForSeconds (60 / enemiesPerMinute);
 		canSpawnEnemy = true;
 		enemiesPerMinute++;
