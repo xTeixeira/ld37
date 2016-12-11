@@ -16,6 +16,7 @@ public class Character : MonoBehaviour {
 	float oriAngle;
 	protected bool isMeleeAttacking;
 
+
 	// Use this for initialization
 	protected void InitCharacter () {
 		rigidBody = GetComponent<Rigidbody2D> ();
@@ -50,7 +51,7 @@ public class Character : MonoBehaviour {
 			currentAxis = "down";
 
 		foreach (AnimatorControllerParameter parameter in animator.parameters) {
-			if (!parameter.name.Equals (currentAxis))
+			if (!parameter.name.Equals (currentAxis) && !parameter.name.Equals ("attack"))
 				animator.SetBool (parameter.name, false);
 		}
 

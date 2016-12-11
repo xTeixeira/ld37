@@ -136,7 +136,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   life: 10
-  speed: 5
+  speed: 10
   meleeWeapon: {fileID: 114383245760894346, guid: 060b072e364b74654903b466e8b10547,
     type: 2}
   rangedWeapon: {fileID: 114311536146469756, guid: 438b68e2d31bb4d5bbb469093aeaef7f,
