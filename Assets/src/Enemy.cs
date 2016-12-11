@@ -5,7 +5,6 @@ using UnityEngine;
 public class Enemy : Character {
 
 	public float minPlayerDistance;
-	public float attackRange;
 
 	Vector2 nextWaypoint;
 	Vector3 playerPosition;
@@ -38,7 +37,7 @@ public class Enemy : Character {
 	}
 
 	void HandleLife(){
-	apo	if (this.life <= 0)
+		if (this.life <= 0)
 			Destroy (gameObject);
 	}
 
