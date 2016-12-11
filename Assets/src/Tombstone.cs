@@ -4,18 +4,26 @@ using UnityEngine;
 
 public class Tombstone : MonoBehaviour {
 
+	public GameObject hole;
+	public GameObject spawnEffect;
+	public GameObject spawnPoint;
 
-	public GameObject buraco;
-
-	void Start(){ 
+	void Start (){
+		
 	}
 
 	public void SpawnEnemy(GameObject enemy){
-		buraco.GetComponent<Animator> ().Play("Spawning");
-
-		Instantiate (enemy, transform.position, transform.rotation);
+		hole.GetComponent<Animator> ().Play("Spawning");
+		spawnEffect.GetComponent<Animator> ().Play("Spawning");
+		StartCoroutine (SpawnEnemyDelayed (enemy));
 	}
 
-	void Update(){
+	void Update (){
+		
+	}
+
+	IEnumerator SpawnEnemyDelayed(GameObject enemy){
+		yield return new WaitForSeconds (0.5f);
+		Instantiate (enemy, spawnPoint.transform.position, transform.rotation);
 	}
 }
