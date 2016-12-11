@@ -11,6 +11,8 @@ public class Player : Character {
 		this.InitCharacter ();
 	}
 
+
+
 	// Update is called once per frame
 	void Update () {
 		this.SetMoveDirection (new Vector2 (Input.GetAxis ("Horizontal"), Input.GetAxis ("Vertical")));
@@ -52,5 +54,7 @@ public class Player : Character {
 			return true;
 		}
 		return false;
-	}		
+	}
+
+
 }

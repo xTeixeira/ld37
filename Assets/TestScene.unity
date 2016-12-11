@@ -224,15 +224,40 @@ Prefab:
       propertyPath: m_TagString
       value: Player
       objectReference: {fileID: 0}
-    - target: {fileID: 58271859846931200, guid: 72edbd64866db41f9bbee94876567b61,
+    - target: {fileID: 114716809246731688, guid: 72edbd64866db41f9bbee94876567b61,
         type: 2}
-      propertyPath: m_Radius
+      propertyPath: renderer
+      value: 
+      objectReference: {fileID: 485274675}
+    - target: {fileID: 114716809246731688, guid: 72edbd64866db41f9bbee94876567b61,
+        type: 2}
+      propertyPath: invulnerabilityColor.r
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 212479047893560828, guid: 72edbd64866db41f9bbee94876567b61,
+    - target: {fileID: 114716809246731688, guid: 72edbd64866db41f9bbee94876567b61,
         type: 2}
-      propertyPath: m_SortingOrder
-      value: 2
+      propertyPath: invulnerabilityColor.g
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114716809246731688, guid: 72edbd64866db41f9bbee94876567b61,
+        type: 2}
+      propertyPath: invulnerabilityColor.b
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114716809246731688, guid: 72edbd64866db41f9bbee94876567b61,
+        type: 2}
+      propertyPath: invulnerableTime
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 114716809246731688, guid: 72edbd64866db41f9bbee94876567b61,
+        type: 2}
+      propertyPath: canBeDamaged
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114716809246731688, guid: 72edbd64866db41f9bbee94876567b61,
+        type: 2}
+      propertyPath: invulnerabilityColor.a
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 72edbd64866db41f9bbee94876567b61, type: 2}
@@ -310,6 +335,11 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!212 &485274675 stripped
+SpriteRenderer:
+  m_PrefabParentObject: {fileID: 212479047893560828, guid: 72edbd64866db41f9bbee94876567b61,
+    type: 2}
+  m_PrefabInternal: {fileID: 242515223}
 --- !u!1 &709177401
 GameObject:
   m_ObjectHideFlags: 0
