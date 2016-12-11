@@ -36,13 +36,13 @@ public class Player : Character {
 
 		if (Input.GetButtonDown ("Fire1") && meleeWeapon.ready) {
 			animator.SetBool ("attack", true);
-			this.isMeleeAttacking = meleeWeapon.Attack (transform.position, Vector3.zero);
+			this.isMeleeAttacking = meleeWeapon.Attack (Vector3.zero);
 
 
 		}
 		if (Input.GetButtonDown ("Fire2") && rangedWeapon.ready) {
 			animator.SetBool ("attack", true);
-			rangedWeapon.Attack (transform.position + aim.transform.up * 4, aim.transform.up);
+			rangedWeapon.Attack (aim.transform.up);
 		}
 	}
 

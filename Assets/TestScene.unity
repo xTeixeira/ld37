@@ -126,10 +126,10 @@ MonoBehaviour:
   - {fileID: 1332336865393710, guid: 2b6d817b4c4af436b877bd9aa99d1069, type: 2}
   - {fileID: 1989901366326834, guid: 99bc0cf076b4f4e968903ef2b5bf11a9, type: 2}
   tombstones:
-  - {fileID: 1401634108835594, guid: f7747825f676044be9abfec21f30d4ba, type: 2}
   - {fileID: 1046449885237108, guid: 46c43e7016af04cde942e3f7f10522e1, type: 2}
+  - {fileID: 1401634108835594, guid: f7747825f676044be9abfec21f30d4ba, type: 2}
   roomSize: {x: 10, y: 10}
-  tombstonesRandomRange: {x: 3, y: 10}
+  tombstonesRandomRange: {x: 5, y: 10}
   tilesHolder: {fileID: 709177401}
   assetsHolder: {fileID: 1600818830}
 --- !u!4 &192490768
@@ -286,7 +286,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemies:
   - {fileID: 1865370300194282, guid: cddb635a87f58407a9b97583b27696bf, type: 2}
-  enemiesPerMinute: 60
+  enemiesPerMinute: 10
 --- !u!4 &459145906
 Transform:
   m_ObjectHideFlags: 0
