@@ -5,11 +5,14 @@ using UnityEngine;
 public class Player : Character {
 
 	public GameObject aim;
+
+	Animator meleeAnimator;
 	bool hasJoystickInput;
 
 	// Use this for initialization
 	void Start () {
 		this.InitCharacter ();
+		meleeAnimator = GameObject.Find ("MeleeEffect").GetComponent<Animator>() as Animator;
 	}
 
 	// Update is called once per frame
@@ -39,12 +42,18 @@ public class Player : Character {
 	}
 
 	void HandleAttack() {
+		isMeleeAttacking = false;
+
 		if (animator.GetBool("attack")){
 			animator.SetBool("attack",false);
 		}
+		if (meleeAnimator.GetBool ("attack")) {
+			meleeAnimator.SetBool ("attack", false);
+		}
 
-		if ((Input.GetButtonDown ("Fire1") || hasJoystickInput) && meleeWeapon.ready) {
+		if (Input.GetButtonDown ("Fire1") && meleeWeapon.ready) {
 			animator.SetBool ("attack", true);
+			meleeAnimator.GetComponent<Animator> ().SetBool ("attack", true);
 			this.isMeleeAttacking = meleeWeapon.Attack (Vector3.zero);
 
 

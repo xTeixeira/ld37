@@ -52,7 +52,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   weaponName: Foguinho
-  weaponDamage: 1
+  weaponDamage: 10
   weaponType: 0
   cooldown: 0.8
   meleeRange: 5
