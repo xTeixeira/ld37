@@ -17,7 +17,7 @@ public class Character : MonoBehaviour {
 	protected bool isMeleeAttacking;
 	protected bool canMove = true;
 
-	public SpriteRenderer renderer;
+	public SpriteRenderer spriteRenderer;
 
 	public float invulnerableTime;
 
@@ -31,6 +31,7 @@ public class Character : MonoBehaviour {
 		rigidBody = GetComponent<Rigidbody2D> ();
 		meleeWeapon = Instantiate (meleeWeapon, transform);
 		rangedWeapon = Instantiate (rangedWeapon, transform);
+		spriteRenderer = this.GetComponentInChildren<SpriteRenderer> ();
 	}
 
 	protected void HandleMovement () {
@@ -84,9 +85,9 @@ public class Character : MonoBehaviour {
 
 	IEnumerator Invulnerability(){
 		canBeDamaged = false;
-		renderer.GetComponent<SpriteRenderer>().color = invulnerabilityColor;
+		spriteRenderer.GetComponent<SpriteRenderer>().color = invulnerabilityColor;
 		yield return new WaitForSeconds(invulnerableTime);
-		renderer.GetComponent<SpriteRenderer>().color = new Color (255, 255, 255);
+		spriteRenderer.GetComponent<SpriteRenderer>().color = new Color (255, 255, 255);
 		canBeDamaged = true;
 	}
 }

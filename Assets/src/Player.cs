@@ -5,16 +5,16 @@ using UnityEngine;
 public class Player : Character {
 
 	public GameObject aim;
+	bool hasJoystickInput;
 
 	// Use this for initialization
 	void Start () {
 		this.InitCharacter ();
 	}
 
-
-
 	// Update is called once per frame
 	void Update () {
+		hasJoystickInput = (Input.GetAxis ("HorizontalAim") != 0 || Input.GetAxis ("VerticalAim") != 0);
 		this.SetMoveDirection (new Vector2 (Input.GetAxis ("Horizontal"), Input.GetAxis ("Vertical")));
 		this.HandleMovement ();
 		this.HandleAim ();
@@ -23,7 +23,7 @@ public class Player : Character {
 	}
 
 	void HandleAim () {
-		if(Input.GetAxis("HorizontalAim") != 0 || Input.GetAxis("VerticalAim") != 0) {
+		if(hasJoystickInput) {
 			Vector3 axis = new Vector3(Input.GetAxis("HorizontalAim"), Input.GetAxis("VerticalAim"), 0) * 10;
 			float angle = (Mathf.Atan2(axis.y, axis.x) * Mathf.Rad2Deg)-90;
 			aim.transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle));
@@ -43,13 +43,13 @@ public class Player : Character {
 			animator.SetBool("attack",false);
 		}
 
-		if (Input.GetButtonDown ("Fire1") && meleeWeapon.ready) {
+		if ((Input.GetButtonDown ("Fire1") || hasJoystickInput) && meleeWeapon.ready) {
 			animator.SetBool ("attack", true);
 			this.isMeleeAttacking = meleeWeapon.Attack (Vector3.zero);
 
 
 		}
-		if (Input.GetButton ("Fire2") && rangedWeapon.ready) {
+		if ((Input.GetButton ("Fire2") || hasJoystickInput) && rangedWeapon.ready) {
 			animator.SetBool ("attack", true);
 			rangedWeapon.Attack (aim.transform.up);
 		}

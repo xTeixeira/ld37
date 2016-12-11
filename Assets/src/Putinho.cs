@@ -9,12 +9,9 @@ public class Putinho : Character {
 
 	Vector2 direction;
 
-	SpriteRenderer spriteRenderer;
-
 
 	void Start () {
 		this.InitCharacter ();
-		spriteRenderer = this.GetComponentInChildren<SpriteRenderer> ();
 	}
 	
 	void Update () {
