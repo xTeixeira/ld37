@@ -137,12 +137,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   life: 10
   speed: 5
-  currentWeapon: {fileID: 114383245760894346, guid: 060b072e364b74654903b466e8b10547,
+  meleeWeapon: {fileID: 114383245760894346, guid: 060b072e364b74654903b466e8b10547,
+    type: 2}
+  rangedWeapon: {fileID: 114311536146469756, guid: 438b68e2d31bb4d5bbb469093aeaef7f,
     type: 2}
   hitParticle: {fileID: 1045274792781816, guid: 38d3ae99fcc7647c0a7d3c02ddd88a5e,
     type: 2}
   animator: {fileID: 95033374740828898}
-  canAttack: 1
   minPlayerDistance: 15
 --- !u!212 &212889185849379978
 SpriteRenderer:

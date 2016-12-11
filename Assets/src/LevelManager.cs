@@ -71,8 +71,6 @@ public class LevelManager : MonoBehaviour {
 			int x = Mathf.RoundToInt(Random.Range (1, roomSize.x - 2));
 			int y = Mathf.RoundToInt(Random.Range (1, roomSize.y - 2));
 
-			print (x + "," + y);
-
 			if (tombstonesArray [x, y] == 0) {
 				GameObject tombstone = Instantiate (tombstones [Random.Range (0, 2)],
 					new Vector3 (x * 8, y * 8, 0),
@@ -80,6 +78,7 @@ public class LevelManager : MonoBehaviour {
 
 				tombstone.transform.SetParent (assetsHolder.transform);
 				tombstonesArray [x, y] = 1;
+				GameManager.AddTombstone (tombstone.GetComponent<Tombstone>() as Tombstone);
 			}
 		}
 	}

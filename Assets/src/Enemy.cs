@@ -25,17 +25,19 @@ public class Enemy : Character {
 		nextWaypoint = Vector2.Distance (transform.position, nextWaypoint) <= 1 ? 
 			new Vector2 (Random.Range (-40, 40), Random.Range (-40, 40)) : nextWaypoint;
 
+		Vector2 direction;
+
 		if (Vector3.Distance (transform.position, playerPosition) <= minPlayerDistance) {
-			Vector2 direction = transform.InverseTransformPoint (playerPosition).normalized;
+			direction = transform.InverseTransformPoint (playerPosition).normalized;
 			this.SetMoveDirection (direction);
 			this.HandleOrientation (direction);
 		} else {
-			Vector2 direction = transform.InverseTransformPoint (nextWaypoint).normalized;
+			direction = transform.InverseTransformPoint (nextWaypoint).normalized;
 			this.SetMoveDirection (direction);
 			this.HandleOrientation (direction);
 		}
-		if (Vector3.Distance (transform.position, playerPosition) < meleeWeapon.range) {
-			isMeleeAttacking = meleeWeapon.Attack ();
+		if (Vector3.Distance (transform.position, playerPosition) < meleeWeapon.meleeRange) {
+			isMeleeAttacking = meleeWeapon.Attack (transform.position, direction);
 		}
 			
 	}

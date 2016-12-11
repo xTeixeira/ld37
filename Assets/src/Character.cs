@@ -10,7 +10,7 @@ public class Character : MonoBehaviour {
 	Vector2 moveDirection;
 	Rigidbody2D rigidBody;
 
-	public Weapon meleeWeapon;
+	public Weapon meleeWeapon, rangedWeapon;
 	public GameObject hitParticle;
 	public Animator animator; 
 	float oriAngle;
@@ -20,6 +20,7 @@ public class Character : MonoBehaviour {
 	protected void InitCharacter () {
 		rigidBody = GetComponent<Rigidbody2D> ();
 		meleeWeapon = Instantiate (meleeWeapon, transform);
+		rangedWeapon = Instantiate (rangedWeapon, transform);
 	}
 
 	protected void HandleMovement () {
