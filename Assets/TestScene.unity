@@ -247,6 +247,7 @@ MonoBehaviour:
   enemies:
   - {fileID: 1865370300194282, guid: cddb635a87f58407a9b97583b27696bf, type: 2}
   enemiesPerMinute: 60
+  cursorTexture: {fileID: 2800000, guid: b9a0708a39ca348359483bcad1cdd257, type: 3}
 --- !u!4 &459145906
 Transform:
   m_ObjectHideFlags: 0

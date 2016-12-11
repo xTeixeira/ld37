@@ -11,9 +11,12 @@ public class GameManager : MonoBehaviour {
 	public GameObject[] enemies;
 	public float enemiesPerMinute;
 	bool canSpawnEnemy = true;
+	public Texture2D cursorTexture;
 
 	void Start () {
 		player = player == null ? GameObject.Find ("Player").GetComponent<Player>() : player;
+		CursorMode mode = CursorMode.Auto;
+		Cursor.SetCursor(cursorTexture, new Vector2(cursorTexture.width/2, cursorTexture.height/2), mode);
 	}
 
 	void Update (){
