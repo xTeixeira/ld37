@@ -1174,7 +1174,7 @@ MonoBehaviour:
   animator: {fileID: 0}
   canAttack: 1
   minPlayerDistance: 15
-  attackRange: 10
+  attackRange: 4
 --- !u!70 &2119409360
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
