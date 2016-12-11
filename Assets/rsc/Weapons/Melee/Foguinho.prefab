@@ -52,8 +52,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   weaponName: Foguinho
-  weaponDamage: 1
+  weaponDamage: 10
   weaponType: 0
   cooldown: 0.8
-  range: 4
+  meleeRange: 5
+  projectile: {fileID: 0}
+  projectileVelocity: 0
   ready: 1

@@ -12,9 +12,19 @@ public class Character : MonoBehaviour {
 
 	public Weapon meleeWeapon, rangedWeapon;
 	public GameObject hitParticle;
-	public Animator animator; 
-	float oriAngle;
+	public Animator animator;
+
 	protected bool isMeleeAttacking;
+	protected bool canMove = true;
+
+	public SpriteRenderer spriteRenderer;
+
+	public float invulnerableTime;
+
+	public bool canBeDamaged = true;
+
+	public Color invulnerabilityColor;
+
 
 	// Use this for initialization
 	protected void InitCharacter () {
@@ -24,17 +34,28 @@ public class Character : MonoBehaviour {
 	}
 
 	protected void HandleMovement () {
-		rigidBody.velocity = (moveDirection * speed);
+		if(canMove)
+			rigidBody.velocity = (moveDirection * speed);
 	}
 
 	protected void SetMoveDirection (Vector2 direction){
 		this.moveDirection = direction;
 	}
 
+	protected void Move(Vector2 direction){
+		rigidBody.AddForce (direction);
+	}
+
 	public void SendHit(HitInfo hit){
-		life -= hit.damage;
-		if(hitParticle != null)
-			Instantiate (hitParticle, transform.position, Quaternion.identity);
+		if (canBeDamaged) {
+			life -= hit.damage;
+			if(hitParticle != null)
+				Instantiate (hitParticle, transform.position, Quaternion.identity);
+
+			StartCoroutine (Invulnerability ());
+		
+		}
+
 	}
 
 	protected void HandleOrientation (Vector2 oriDirection){
@@ -50,7 +71,7 @@ public class Character : MonoBehaviour {
 			currentAxis = "down";
 
 		foreach (AnimatorControllerParameter parameter in animator.parameters) {
-			if (!parameter.name.Equals (currentAxis))
+			if (!parameter.name.Equals (currentAxis) && !parameter.name.Equals ("attack"))
 				animator.SetBool (parameter.name, false);
 		}
 
@@ -61,4 +82,11 @@ public class Character : MonoBehaviour {
 		return meleeWeapon.GetHitInfo();
 	}
 
+	IEnumerator Invulnerability(){
+		canBeDamaged = false;
+		spriteRenderer.GetComponent<SpriteRenderer>().color = invulnerabilityColor;
+		yield return new WaitForSeconds(invulnerableTime);
+		spriteRenderer.GetComponent<SpriteRenderer>().color = new Color (255, 255, 255);
+		canBeDamaged = true;
+	}
 }

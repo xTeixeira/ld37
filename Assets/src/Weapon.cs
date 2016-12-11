@@ -15,24 +15,28 @@ public class Weapon : MonoBehaviour {
 	public float projectileVelocity;
 	public bool ready;
 
+	string ownerTag;
 	HitInfo hitInfo;
 
+
+
 	public HitInfo GetHitInfo() {
-		return new HitInfo(weaponDamage);
+		return new HitInfo(weaponDamage, gameObject.transform.parent.tag);
 	}
 
-	public bool Attack(Vector3 origin, Vector3 attackDirection) {
+	public bool Attack(Vector3 attackDirection) {
 		if (ready) {
-			StartCoroutine (AttackCooldown ());
+			StartCoroutine (AttackCooldown());
+
 			if (weaponType == WeaponType.Ranged)
-				CreateProjectile (origin, attackDirection);
+				CreateProjectile (attackDirection);
 			return true;
 		}
 		return false;
 	}
 
-	void CreateProjectile(Vector3 origin, Vector3 direction){
-		Instantiate (projectile, origin, transform.rotation).
+	void CreateProjectile(Vector3 direction){
+		Instantiate (projectile, transform.position, transform.rotation).
 		GetComponent<Projectile>().InitProjectile(direction, projectileVelocity, GetHitInfo());
 	}
 

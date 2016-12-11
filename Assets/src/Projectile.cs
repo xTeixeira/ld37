@@ -5,7 +5,9 @@ using UnityEngine;
 public class Projectile : MonoBehaviour {
 
 	Rigidbody2D rigidBody2D;
+	[SerializeField]
 	float velocity;
+	[SerializeField]
 	Vector3 direction;
 	HitInfo hitInfo;
 
@@ -15,6 +17,7 @@ public class Projectile : MonoBehaviour {
 
 	void Update (){
 		rigidBody2D.velocity = direction * velocity;
+		transform.Rotate (new Vector3(0, 0, 200 * Time.deltaTime));
 	}
 
 	public void InitProjectile (Vector3 direction, float velocity, HitInfo hitInfo) {
@@ -23,11 +26,13 @@ public class Projectile : MonoBehaviour {
 		this.hitInfo = hitInfo;
 	}
 
-	void OnCollisionEnter2D(Collision2D col){
-		if (col.gameObject.CompareTag ("Enemy")) {
-			col.gameObject.GetComponent<Enemy> ().SendHit (hitInfo);
+	void OnTriggerEnter2D(Collider2D col){
+		if (!col.gameObject.CompareTag (hitInfo.ownerTag) && col.gameObject.layer != 8) {
+			if (col.gameObject.CompareTag ("Enemy")) {
+				col.gameObject.GetComponent<Character> ().SendHit (hitInfo);
+			}
+			Destroy (gameObject);
 		}
-		Destroy (gameObject);
 	}
 
 }
