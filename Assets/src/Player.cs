@@ -5,11 +5,18 @@ using UnityEngine;
 public class Player : Character {
 
 	public GameObject aim;
+
+	Animator meleeAnimator;
 	bool hasJoystickInput;
+	public float dashSpeed;
+	bool canDash = true;
+	public float dashCooldown;
+	public float dashDuration;
 
 	// Use this for initialization
 	void Start () {
 		this.InitCharacter ();
+		meleeAnimator = GameObject.Find ("MeleeEffect").GetComponent<Animator>() as Animator;
 	}
 
 	// Update is called once per frame
@@ -20,6 +27,7 @@ public class Player : Character {
 		this.HandleAim ();
 		this.HandleOrientation (aim.transform.up);
 		this.HandleAttack ();
+		this.HandleDashInput ();
 	}
 
 	void HandleAim () {
@@ -39,12 +47,18 @@ public class Player : Character {
 	}
 
 	void HandleAttack() {
+		isMeleeAttacking = false;
+
 		if (animator.GetBool("attack")){
 			animator.SetBool("attack",false);
 		}
+		if (meleeAnimator.GetBool ("attack")) {
+			meleeAnimator.SetBool ("attack", false);
+		}
 
-		if ((Input.GetButtonDown ("Fire1") || hasJoystickInput) && meleeWeapon.ready) {
+		if (Input.GetButtonDown ("Fire1") && meleeWeapon.ready) {
 			animator.SetBool ("attack", true);
+			meleeAnimator.GetComponent<Animator> ().SetBool ("attack", true);
 			this.isMeleeAttacking = meleeWeapon.Attack (Vector3.zero);
 
 
@@ -63,5 +77,28 @@ public class Player : Character {
 		return false;
 	}
 
+	void HandleDashInput() {
+
+		if (Input.GetKeyDown (KeyCode.LeftShift) && canDash) {
+			StartCoroutine(Dash());
+			StartCoroutine (EnterDashCooldown ());
+		}
+
+	}
+
+	IEnumerator Dash() {
+		float oldSpeed = speed;
+		this.speed = speed * dashSpeed;
+		yield return new WaitForSeconds(dashDuration);
+		this.speed = oldSpeed;
+
+	}
+
+	IEnumerator EnterDashCooldown (){
+		this.canDash = false;
+		yield return new WaitForSeconds (dashCooldown);
+		this.canDash = true;
+
+	}
 
 }

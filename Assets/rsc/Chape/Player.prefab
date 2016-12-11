@@ -358,11 +358,14 @@ MonoBehaviour:
   hitParticle: {fileID: 1045274792781816, guid: 38d3ae99fcc7647c0a7d3c02ddd88a5e,
     type: 2}
   animator: {fileID: 95710318240740188}
-  renderer: {fileID: 212479047893560828}
+  spriteRenderer: {fileID: 0}
   invulnerableTime: 1.5
   canBeDamaged: 1
   invulnerabilityColor: {r: 1, g: 0, b: 0, a: 0.528}
   aim: {fileID: 1138311359644334}
+  dashSpeed: 6
+  dashCooldown: 2
+  dashDuration: 0.07
 --- !u!124 &124835411626763330
 Behaviour:
   m_ObjectHideFlags: 1

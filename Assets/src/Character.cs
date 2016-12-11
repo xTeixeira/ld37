@@ -31,7 +31,6 @@ public class Character : MonoBehaviour {
 		rigidBody = GetComponent<Rigidbody2D> ();
 		meleeWeapon = Instantiate (meleeWeapon, transform);
 		rangedWeapon = Instantiate (rangedWeapon, transform);
-		spriteRenderer = this.GetComponentInChildren<SpriteRenderer> ();
 	}
 
 	protected void HandleMovement () {
