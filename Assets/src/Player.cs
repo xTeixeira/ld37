@@ -7,6 +7,9 @@ public class Player : Character {
 	public GameObject aim;
 	bool hasJoystickInput;
 	public float dashSpeed;
+	bool canDash = true;
+	public float dashCooldown;
+	public float dashDuration;
 
 	// Use this for initialization
 	void Start () {
@@ -67,8 +70,9 @@ public class Player : Character {
 
 	void HandleDashInput() {
 
-		if (Input.GetKeyDown (KeyCode.LeftShift)) {
+		if (Input.GetKeyDown (KeyCode.LeftShift) && canDash) {
 			StartCoroutine(Dash());
+			StartCoroutine (EnterDashCooldown ());
 		}
 
 	}
@@ -76,8 +80,15 @@ public class Player : Character {
 	IEnumerator Dash() {
 		float oldSpeed = speed;
 		this.speed = speed * dashSpeed;
-		yield return new WaitForSeconds(0.05f);
+		yield return new WaitForSeconds(dashDuration);
 		this.speed = oldSpeed;
+
+	}
+
+	IEnumerator EnterDashCooldown (){
+		this.canDash = false;
+		yield return new WaitForSeconds (dashCooldown);
+		this.canDash = true;
 
 	}
 
