@@ -6,6 +6,7 @@ public class Player : Character {
 
 	public GameObject aim;
 	bool hasJoystickInput;
+	public float dashSpeed;
 
 	// Use this for initialization
 	void Start () {
@@ -20,6 +21,7 @@ public class Player : Character {
 		this.HandleAim ();
 		this.HandleOrientation (aim.transform.up);
 		this.HandleAttack ();
+		this.HandleDashInput ();
 	}
 
 	void HandleAim () {
@@ -63,5 +65,20 @@ public class Player : Character {
 		return false;
 	}
 
+	void HandleDashInput() {
+
+		if (Input.GetKeyDown (KeyCode.LeftShift)) {
+			StartCoroutine(Dash());
+		}
+
+	}
+
+	IEnumerator Dash() {
+		float oldSpeed = speed;
+		this.speed = speed * dashSpeed;
+		yield return new WaitForSeconds(0.05f);
+		this.speed = oldSpeed;
+
+	}
 
 }
