@@ -9,7 +9,7 @@ public class GameManager : MonoBehaviour {
 
 
 	public GameObject[] enemies;
-	public int enemiesPerMinute;
+	public float enemiesPerMinute;
 	bool canSpawnEnemy = true;
 
 	void Start () {
@@ -40,8 +40,10 @@ public class GameManager : MonoBehaviour {
 
 	IEnumerator EnemySpawnCooldown (){
 		canSpawnEnemy = false;
-		yield return new WaitForSeconds ( (int)(60.0f / enemiesPerMinute));
+		print (60 / enemiesPerMinute);
+		yield return new WaitForSeconds (60 / enemiesPerMinute);
 		canSpawnEnemy = true;
+		enemiesPerMinute++;
 	}
 
 	public static Player GetPlayer(){

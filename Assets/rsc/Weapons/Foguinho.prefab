@@ -55,5 +55,7 @@ MonoBehaviour:
   weaponDamage: 1
   weaponType: 0
   cooldown: 0.8
-  range: 4
+  meleeRange: 0
+  projectile: {fileID: 0}
+  projectileVelocity: 0
   ready: 1

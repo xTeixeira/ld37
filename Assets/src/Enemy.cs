@@ -4,8 +4,6 @@ using UnityEngine;
 
 public class Enemy : Character {
 
-	public float minPlayerDistance;
-
 	Vector2 nextWaypoint;
 	Vector3 playerPosition;
 
@@ -22,22 +20,13 @@ public class Enemy : Character {
 
 	void HandleAI () {
 		playerPosition = GameManager.GetPlayerPosition();
-		nextWaypoint = Vector2.Distance (transform.position, nextWaypoint) <= 1 ? 
-			new Vector2 (Random.Range (-40, 40), Random.Range (-40, 40)) : nextWaypoint;
 
-		Vector2 direction;
-
-		if (Vector3.Distance (transform.position, playerPosition) <= minPlayerDistance) {
-			direction = transform.InverseTransformPoint (playerPosition).normalized;
-			this.SetMoveDirection (direction);
-			this.HandleOrientation (direction);
-		} else {
-			direction = transform.InverseTransformPoint (nextWaypoint).normalized;
-			this.SetMoveDirection (direction);
-			this.HandleOrientation (direction);
-		}
+		Vector2 direction = transform.InverseTransformPoint (playerPosition).normalized;
+		this.SetMoveDirection (direction);
+		this.HandleOrientation (direction);
+		
 		if (Vector3.Distance (transform.position, playerPosition) < meleeWeapon.meleeRange) {
-			isMeleeAttacking = meleeWeapon.Attack (transform.position, direction);
+			isMeleeAttacking = meleeWeapon.Attack (direction);
 		}
 			
 	}

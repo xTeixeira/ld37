@@ -23,11 +23,13 @@ public class Projectile : MonoBehaviour {
 		this.hitInfo = hitInfo;
 	}
 
-	void OnCollisionEnter2D(Collision2D col){
-		if (col.gameObject.CompareTag ("Enemy")) {
-			col.gameObject.GetComponent<Enemy> ().SendHit (hitInfo);
+	void OnTriggerEnter2D(Collider2D col){
+		if (!col.gameObject.CompareTag (hitInfo.ownerTag)) {
+			if (col.gameObject.CompareTag ("Enemy")) {
+				col.gameObject.GetComponent<Enemy> ().SendHit (hitInfo);
+			}
+			Destroy (gameObject);
 		}
-		Destroy (gameObject);
 	}
 
 }
