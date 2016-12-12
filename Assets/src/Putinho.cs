@@ -63,8 +63,13 @@ public class Putinho : Character {
 		if (col.gameObject.CompareTag ("Player")) {
 			if (!isMeleeAttacking) {
 				GameManager.SendPlayerHit (meleeWeapon.GetHitInfo ());
-				Destroy (gameObject);
 			}
 		}
+	}
+
+	void Kill() {
+		Destroy (gameObject);
+		if(hitParticle != null)
+			Instantiate (hitParticle, transform.position, Quaternion.identity);
 	}
 }
