@@ -67,4 +67,19 @@ public class Bob : Character {
 	IEnumerator waitStopped(float seconds){
 		yield return new WaitForSeconds (seconds);
 	}
+
+	void OnTriggerEnter2D(Collider2D col){
+		if (col.gameObject.CompareTag ("Player")) {
+			if (!isMeleeAttacking) {
+				GameManager.SendPlayerHit (meleeWeapon.GetHitInfo ());
+				Kill ();
+			}
+		}
+	}
+
+	void Kill() {
+		Destroy (gameObject);
+		if(hitParticle != null)
+			Instantiate (hitParticle, transform.position, Quaternion.identity);
+	}
 }

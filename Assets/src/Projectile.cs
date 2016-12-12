@@ -28,9 +28,11 @@ public class Projectile : MonoBehaviour {
 
 	void OnTriggerEnter2D(Collider2D col){
 		if (!col.gameObject.CompareTag (hitInfo.ownerTag) && col.gameObject.layer != 8) {
-			if (col.gameObject.CompareTag ("Enemy")) {
-				col.gameObject.GetComponent<Character> ().SendHit (hitInfo);
+			
+			try{col.gameObject.GetComponent<Character> ().SendHit (hitInfo);}
+			catch{
 			}
+			
 			Destroy (gameObject);
 		}
 	}

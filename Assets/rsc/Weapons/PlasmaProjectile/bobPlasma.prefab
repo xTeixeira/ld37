@@ -22,7 +22,7 @@ GameObject:
   - component: {fileID: 114942687637206142}
   - component: {fileID: 50001611303885510}
   - component: {fileID: 58750094428896704}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: bobPlasma
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -39,7 +39,7 @@ GameObject:
   - component: {fileID: 4875159381315158}
   - component: {fileID: 212715314432485670}
   - component: {fileID: 95163475015290886}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Plasma spritesheet_0
   m_TagString: Untagged
   m_Icon: {fileID: 0}

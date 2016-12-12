@@ -54,8 +54,8 @@ MonoBehaviour:
   weaponName: Repeater
   weaponDamage: 3
   weaponType: 1
-  cooldown: 0.3
+  cooldown: 1.5
   meleeRange: 0
   projectile: {fileID: 1221601899290084, guid: 6960cf4ac2f3c4438b5ed77b2100c009, type: 2}
-  projectileVelocity: 10
+  projectileVelocity: 20
   ready: 1

@@ -10,7 +10,7 @@ public class AimColliderListener : MonoBehaviour {
 	void Update() {
 		player = player == null ? GameManager.GetPlayer() : player;
 		if (player.IsMeleeAttacking ()) {
-			foreach (Putinho enemy in enemies){
+			foreach (Character enemy in enemies){
 				if (enemy != null) {
 					enemy.SendHit (player.GetCurrentHitInfo ());
 				} 
@@ -21,14 +21,14 @@ public class AimColliderListener : MonoBehaviour {
 	void OnTriggerEnter2D (Collider2D col) {
 		player = player == null ? GameManager.GetPlayer() : player;
 		if (col.gameObject.CompareTag ("Enemy")) {
-			enemies.Add (col.gameObject.GetComponent<Putinho> ());
+			enemies.Add (col.gameObject.GetComponent<Character> ());
 		}
 	}
 
 	void OnTriggerExit2D (Collider2D col) {
 		player = player == null ? GameManager.GetPlayer() : player;
 		if (col.gameObject.CompareTag ("Enemy")) {
-			enemies.Remove (col.gameObject.GetComponent<Putinho> ());
+			enemies.Remove (col.gameObject.GetComponent<Character> ());
 		}
 
 	}

@@ -59,7 +59,7 @@ public class Player : Character {
 
 		if (Input.GetButtonDown ("Fire2") && meleeWeapon.ready) {
 			animator.SetBool ("attack", true);
-			meleeAnimator.GetComponent<Animator> ().SetBool ("attack", true);
+			meleeAnimator.StartAttackAnimation (aim.transform.up);
 			this.isMeleeAttacking = meleeWeapon.Attack (transform.position, Vector3.zero);
 		}
 
