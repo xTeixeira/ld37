@@ -49,11 +49,7 @@ public class Character : MonoBehaviour {
 	public void SendHit(HitInfo hit){
 		if (canBeDamaged) {
 			life -= hit.damage;
-			if(hitParticle != null)
-				Instantiate (hitParticle, transform.position, Quaternion.identity);
-
 			StartCoroutine (Invulnerability ());
-		
 		}
 
 	}
