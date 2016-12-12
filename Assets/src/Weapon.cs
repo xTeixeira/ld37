@@ -24,19 +24,19 @@ public class Weapon : MonoBehaviour {
 		return new HitInfo(weaponDamage, gameObject.transform.parent.tag);
 	}
 
-	public bool Attack(Vector3 attackDirection) {
+	public bool Attack(Vector3 origin, Vector3 attackDirection) {
 		if (ready) {
 			StartCoroutine (AttackCooldown());
 
 			if (weaponType == WeaponType.Ranged)
-				CreateProjectile (attackDirection);
+				CreateProjectile (origin, attackDirection);
 			return true;
 		}
 		return false;
 	}
 
-	void CreateProjectile(Vector3 direction){
-		Instantiate (projectile, transform.position, transform.rotation).
+	void CreateProjectile(Vector3 origin, Vector3 direction){
+		Instantiate (projectile, origin, transform.rotation).
 		GetComponent<Projectile>().InitProjectile(direction, projectileVelocity, GetHitInfo());
 	}
 
