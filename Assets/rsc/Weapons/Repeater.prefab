@@ -52,7 +52,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   weaponName: Repeater
-  weaponDamage: 3
+  weaponDamage: 1
   weaponType: 1
   cooldown: 0.2
   meleeRange: 0

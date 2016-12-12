@@ -25,6 +25,11 @@ public class Character : MonoBehaviour {
 
 	public Color invulnerabilityColor;
 
+	public bool hasInvulnerability;
+
+	public float hitFeedbackTime;
+
+	protected bool isHit = false;
 
 	// Use this for initialization
 	protected void InitCharacter () {
@@ -52,7 +57,12 @@ public class Character : MonoBehaviour {
 			if(hitParticle != null)
 				Instantiate (hitParticle, transform.position, Quaternion.identity);
 
-			StartCoroutine (Invulnerability ());
+			if (hasInvulnerability) {
+				StartCoroutine (Invulnerability ());
+			}
+
+			StartCoroutine (HitFeedback ());
+
 		
 		}
 
@@ -84,9 +94,15 @@ public class Character : MonoBehaviour {
 
 	IEnumerator Invulnerability(){
 		canBeDamaged = false;
-		spriteRenderer.GetComponent<SpriteRenderer>().color = invulnerabilityColor;
 		yield return new WaitForSeconds(invulnerableTime);
-		spriteRenderer.GetComponent<SpriteRenderer>().color = new Color (255, 255, 255);
 		canBeDamaged = true;
+	}
+
+	IEnumerator HitFeedback(){
+		isHit = true;
+		spriteRenderer.GetComponent<SpriteRenderer>().color = invulnerabilityColor;
+		yield return new WaitForSeconds(hitFeedbackTime);
+		spriteRenderer.GetComponent<SpriteRenderer>().color = new Color (255, 255, 255);
+		isHit = false;
 	}
 }

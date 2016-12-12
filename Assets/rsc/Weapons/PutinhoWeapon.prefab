@@ -21,7 +21,7 @@ GameObject:
   - component: {fileID: 4792497089231770}
   - component: {fileID: 114383245760894346}
   m_Layer: 0
-  m_Name: Foguinho
+  m_Name: PutinhoWeapon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -51,9 +51,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f88840124771f49adb5d47a896a2d538, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  weaponName: Foguinho
-  weaponDamage: 1
+  weaponName: PutinhoWeapon
+  weaponDamage: 5
   weaponType: 0
   cooldown: 0.8
-  range: 4
+  meleeRange: 0
+  projectile: {fileID: 0}
+  projectileVelocity: 0
   ready: 1

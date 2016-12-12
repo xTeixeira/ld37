@@ -32,7 +32,11 @@ public class Putinho : Character {
 		float playerDistance = Vector3.Distance(transform.position, playerPosition);
 
 		Color color = spriteRenderer.color;
-		color.a = isSpawning ? color.a += 0.2f : playerDistance * 0.15f;
+		if (isSpawning) {
+			color.a += 0.2f;
+		} else if (!isHit) {
+			color.a = playerDistance * 0.15f;
+		}
 		spriteRenderer.color = color;
 			
 	}
