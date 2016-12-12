@@ -52,7 +52,9 @@ public class Character : MonoBehaviour {
 			if(hitParticle != null)
 				Instantiate (hitParticle, transform.position, Quaternion.identity);
 
-			StartCoroutine (Invulnerability ());
+			if (this.invulnerableTime != 0) {
+				StartCoroutine (Invulnerability ());
+			}
 		
 		}
 

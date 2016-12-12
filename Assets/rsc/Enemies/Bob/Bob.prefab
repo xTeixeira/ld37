@@ -24,7 +24,7 @@ GameObject:
   - component: {fileID: 58754070503918948}
   m_Layer: 0
   m_Name: Bob
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -66,7 +66,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1775251450417562}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 13.110297, y: 0.7177175, z: 0}
+  m_LocalPosition: {x: 16.756313, y: 2.8479948, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4266239427223604}
@@ -87,7 +87,7 @@ Rigidbody2D:
   m_Mass: 1
   m_LinearDrag: 0
   m_AngularDrag: 0
-  m_GravityScale: 1
+  m_GravityScale: 0
   m_Material: {fileID: 0}
   m_Interpolate: 0
   m_SleepingMode: 1
@@ -102,7 +102,7 @@ CircleCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
@@ -135,6 +135,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2aece330e975147779584b66eef3c02e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  life: 10
+  speed: 3
+  meleeWeapon: {fileID: 114383245760894346, guid: 060b072e364b74654903b466e8b10547,
+    type: 2}
+  rangedWeapon: {fileID: 114311536146469756, guid: 438b68e2d31bb4d5bbb469093aeaef7f,
+    type: 2}
+  hitParticle: {fileID: 1045274792781816, guid: 38d3ae99fcc7647c0a7d3c02ddd88a5e,
+    type: 2}
+  animator: {fileID: 95683451352009072}
+  spriteRenderer: {fileID: 212351556249112910}
+  invulnerableTime: 0
+  canBeDamaged: 1
+  invulnerabilityColor: {r: 1, g: 1, b: 1, a: 0}
 --- !u!212 &212351556249112910
 SpriteRenderer:
   m_ObjectHideFlags: 1
