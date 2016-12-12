@@ -27,6 +27,11 @@ public class Bob : Character {
 	}
 
 	void HandleAI(){
+
+		if(animator.GetBool("attack")){
+			animator.SetBool ("attack", false);
+		}
+
 		if (!isTimeToMove) {
 			playerPosition = GameManager.GetPlayerPosition ();
 			direction = transform.InverseTransformPoint (playerPosition).normalized;

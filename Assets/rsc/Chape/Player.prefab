@@ -557,7 +557,7 @@ MonoBehaviour:
   animator: {fileID: 95710318240740188}
   spriteRenderer: {fileID: 212479047893560828}
   invulnerableTime: 1.5
-  canBeDamaged: 1
+  canBeDamaged: 0
   invulnerabilityColor: {r: 1, g: 1, b: 1, a: 0.528}
   hasInvulnerability: 1
   hitFeedbackTime: 1.5

@@ -18,8 +18,6 @@ public class Weapon : MonoBehaviour {
 	string ownerTag;
 	HitInfo hitInfo;
 
-
-
 	public HitInfo GetHitInfo() {
 		return new HitInfo(weaponDamage, gameObject.transform.parent.tag);
 	}
