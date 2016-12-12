@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.Audio;
 
 public class GameManager : MonoBehaviour {
 
@@ -9,24 +10,39 @@ public class GameManager : MonoBehaviour {
 	public static ArrayList tombstones;
 	public static GameObject entitiesHolder;
 
-	public GameObject playerPrefab;
 	public GameObject[] enemies;
 	public float enemiesPerMinute;
+	public float enemiesPerMinuteIncreaseRate;
+	float enemiesSpawnRate;
 	bool canSpawnEnemy = true;
+
+	public LevelManager levelManager;
+	public GameObject gameOverUIHolder;
+	public static AudioSource audioSource;
+
 	public Texture2D cursorTexture;
 
-	public GameObject gameOverUIHolder;
-	public Text scoreText;
-
+	public GameObject playerPrefab;
 	static Vector3 lastPlayerPosition;
 	static bool playerIsAlive = true;
+	public Text scoreText;
+
 	public static int playerScore;
 
 	void Start () {
-		GetEntitiesHolder ();
 		player = Instantiate(playerPrefab, transform).GetComponent<Player>();
+		audioSource = GetComponent<AudioSource> ();
+
+		levelManager = levelManager == null ? 
+						GameObject.Find ("LevelManager").GetComponent<LevelManager>() : levelManager;
+		levelManager.CreateLevel ();
+		GetEntitiesHolder ();
+		enemiesSpawnRate = enemiesPerMinute;
+
+		//cursor
 		CursorMode mode = CursorMode.Auto;
 		Cursor.SetCursor(cursorTexture, new Vector2(cursorTexture.width/2, cursorTexture.height/2), mode);
+
 	}
 
 	void Update (){
@@ -36,7 +52,7 @@ public class GameManager : MonoBehaviour {
 
 	void HandleEnemySpawn () {
 		entitiesHolder = entitiesHolder == null ? GetEntitiesHolder () : entitiesHolder;
-		if (canSpawnEnemy) {
+		if (canSpawnEnemy && tombstones.Count > 0) {
 			((Tombstone) tombstones [Random.Range (0, tombstones.Count)]).
 			SpawnEnemy (enemies[Random.Range (0, enemies.Length)], entitiesHolder.transform);
 			StartCoroutine (EnemySpawnCooldown ());
@@ -62,8 +78,11 @@ public class GameManager : MonoBehaviour {
 		gameOverUIHolder.SetActive(false);
 		playerIsAlive = true;
 		KillAllEnemies ();
+		levelManager.DestroyLevel ();
+		levelManager.CreateLevel ();
 		GetEntitiesHolder ();
 		playerScore = 0;
+		enemiesSpawnRate = enemiesPerMinute;
 	}
 
 	public static Vector3 GetPlayerPosition(){
@@ -82,11 +101,15 @@ public class GameManager : MonoBehaviour {
 		tombstones.Add(tombstone);
 	}
 
+	public static void PlayAudioOneShot (AudioClip clip) {
+		audioSource.PlayOneShot (clip);
+	}
+
 	IEnumerator EnemySpawnCooldown (){
 		canSpawnEnemy = false;
-		yield return new WaitForSeconds (60 / enemiesPerMinute);
+		yield return new WaitForSeconds (60 / enemiesSpawnRate);
 		canSpawnEnemy = true;
-		enemiesPerMinute++;
+		enemiesSpawnRate += enemiesPerMinuteIncreaseRate;
 	}
 
 	static public GameObject GetEntitiesHolder () {
