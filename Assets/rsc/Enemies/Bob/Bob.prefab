@@ -66,7 +66,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1775251450417562}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 16.756313, y: 2.8479948, z: 0}
+  m_LocalPosition: {x: 3.1166604, y: -2.6548553, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4266239427223604}
@@ -147,13 +147,13 @@ MonoBehaviour:
   spriteRenderer: {fileID: 212351556249112910}
   invulnerableTime: 0
   canBeDamaged: 1
-  invulnerabilityColor: {r: 1, g: 1, b: 1, a: 0}
+  invulnerabilityColor: {r: 1, g: 1, b: 1, a: 0.5019608}
   hasInvulnerability: 0
-  hitFeedbackTime: 0
-  timeMovingMin: 1
-  timeMovingMax: 5
-  timeStoppedMin: 1
-  timeStoppedMax: 6
+  hitFeedbackTime: 0.25
+  timeMovingMin: 3
+  timeMovingMax: 7
+  timeStoppedMin: 5
+  timeStoppedMax: 10
 --- !u!212 &212351556249112910
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -185,7 +185,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 97358db5d9c7441d2abca6206ab8ae29, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 33e93a731e75f4384a5d7be21db370ae, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0

@@ -8,7 +8,9 @@ public class Bob : Character {
 
 	Vector2 direction;
 
-	bool isTimeToMove = true;
+	bool isAbleToMove = true;
+	bool isAbleToAttack = false;
+	bool hasLockedAttackState = false;
 
 	public float timeMovingMin = 1.0f;
 	public float timeMovingMax = 5.0f;
@@ -32,7 +34,14 @@ public class Bob : Character {
 			animator.SetBool ("attack", false);
 		}
 
-		if (!isTimeToMove) {
+		if (isAbleToAttack) {
+			if (!hasLockedAttackState) {
+				float secondsStopped = Random.Range (timeStoppedMin, timeStoppedMax);
+				StartCoroutine (lockStateAtacking (secondsStopped));
+				this.SetMoveDirection (Vector2.zero);
+				hasLockedAttackState = true;
+			}
+
 			playerPosition = GameManager.GetPlayerPosition ();
 			direction = transform.InverseTransformPoint (playerPosition).normalized;
 			this.HandleOrientation (direction);
@@ -41,14 +50,15 @@ public class Bob : Character {
 				animator.SetBool ("attack", true);
 				rangedWeapon.Attack (transform.position, direction);
 			}
-		}else{
+		}
+
+		if(isAbleToMove){
+
 			direction = new Vector2(Random.Range(-1.0f, 1.0f), Random.Range(-1.0f, 1.0f));
 			this.SetMoveDirection (direction);
 
-			float secondsStopped = Random.Range (timeStoppedMin, timeStoppedMax);
 			float secondsMoving = Random.Range (timeMovingMin, timeMovingMax); 
-
-			StartCoroutine (whaitForNextWaypoint(secondsMoving, secondsStopped));
+			StartCoroutine( lockStateMoving (secondsMoving));
 		}
 	}
 
@@ -58,20 +68,22 @@ public class Bob : Character {
 			Kill ();
 		}
 	}
+
+	IEnumerator lockStateAtacking(float secondsOnState){
+		isAbleToMove = false;
+		yield return new WaitForSeconds (secondsOnState);
+		hasLockedAttackState = false;
+		isAbleToAttack = false;
+		isAbleToMove = true;
+	}
+
+	IEnumerator lockStateMoving(float secondsOnState){
+		isAbleToAttack = false;
+		isAbleToMove = false;
+		yield return new WaitForSeconds (secondsOnState);
+		isAbleToAttack = true;
+	}
 		
-	IEnumerator whaitForNextWaypoint (float secondsMoving, float secondsStopped)
-	{
-		isTimeToMove = false;
-		yield return new WaitForSeconds (secondsMoving);
-		this.SetMoveDirection (Vector2.zero);
-		StartCoroutine( waitStopped (secondsStopped));
-		isTimeToMove = true;
-	}
-
-	IEnumerator waitStopped(float seconds){
-		yield return new WaitForSeconds (seconds);
-	}
-
 	void OnCollisionEnter2D(Collision2D col){
 		if (col.gameObject.CompareTag ("Player")) {
 			if (!isMeleeAttacking) {
