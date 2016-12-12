@@ -4,13 +4,17 @@ using UnityEngine;
 
 public class Bob : Character {
 
-	//GameObject aim  = new GameObject ();
-
 	Vector3 playerPosition;
 
 	Vector2 direction;
 
 	bool isTimeToMove = true;
+
+	public float timeMovingMin = 1.0f;
+	public float timeMovingMax = 5.0f;
+
+	public float timeStoppedMin = 1.0f;
+	public float timeStoppedMax = 6.0f;
 
 	// Use this for initialization
 	void Start () {
@@ -35,24 +39,32 @@ public class Bob : Character {
 				animator.SetBool ("attack", true);
 				rangedWeapon.Attack (transform.position, direction);
 			}
+		}else{
+			direction = new Vector2(Random.Range(-1.0f, 1.0f), Random.Range(-1.0f, 1.0f));
+			this.SetMoveDirection (direction);
 
-		} else {
-			
-			isTimeToMove = false;
+			float secondsStopped = Random.Range (timeStoppedMin, timeStoppedMax);
+			float secondsMoving = Random.Range (timeMovingMin, timeMovingMax); 
+
+			StartCoroutine (whaitForNextWaypoint(secondsMoving, secondsStopped));
 		}
-	} 
-
-	void HandleAim(){
-		/*Vector3 mouse_pos = Input.mousePosition;
-		Vector3 object_pos = Camera.main.WorldToScreenPoint(aim.transform.position);
-		mouse_pos.x = mouse_pos.x - object_pos.x;
-		mouse_pos.y = mouse_pos.y - object_pos.y;
-		float angle = (Mathf.Atan2(playerPosition.y, playerPosition.x) * Mathf.Rad2Deg)-90;
-		aim.transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle));*/
 	}
 
 	void HandleLife(){
 		if (this.life <= 0)
 			Destroy (gameObject);
+	}
+		
+	IEnumerator whaitForNextWaypoint (float secondsMoving, float secondsStopped)
+	{
+		isTimeToMove = false;
+		yield return new WaitForSeconds (secondsMoving);
+		this.SetMoveDirection (Vector2.zero);
+		StartCoroutine( waitStopped (secondsStopped));
+		isTimeToMove = true;
+	}
+
+	IEnumerator waitStopped(float seconds){
+		yield return new WaitForSeconds (seconds);
 	}
 }
