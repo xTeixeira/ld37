@@ -42,8 +42,10 @@ public class Putinho : Character {
 	}
 
 	void HandleLife(){
-		if (this.life <= 0)
+		if (this.life <= 0) {
+			GameManager.AddScore (10);
 			Destroy (gameObject);
+		}
 	}
 
 	IEnumerator DeathFade (){
@@ -63,6 +65,7 @@ public class Putinho : Character {
 		if (col.gameObject.CompareTag ("Player")) {
 			if (!isMeleeAttacking) {
 				GameManager.SendPlayerHit (meleeWeapon.GetHitInfo ());
+				Kill ();
 			}
 		}
 	}
