@@ -13,9 +13,11 @@ public class Tombstone : MonoBehaviour {
 	}
 
 	public void SpawnEnemy(GameObject enemy, Transform parent){
-		hole.GetComponent<Animator> ().Play("Spawning");
-		spawnEffect.GetComponent<Animator> ().Play("Spawning");
-		StartCoroutine (SpawnEnemyDelayed (enemy, parent));
+		if (enemy != null && hole != null & spawnEffect != null) {
+			hole.GetComponent<Animator> ().Play ("Spawning");
+			spawnEffect.GetComponent<Animator> ().Play ("Spawning");
+			StartCoroutine (SpawnEnemyDelayed (enemy, parent));
+		}
 	}
 
 	IEnumerator SpawnEnemyDelayed(GameObject enemy, Transform parent){
