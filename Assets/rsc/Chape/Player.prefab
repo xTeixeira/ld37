@@ -556,6 +556,8 @@ MonoBehaviour:
     type: 2}
   animator: {fileID: 95710318240740188}
   spriteRenderer: {fileID: 212479047893560828}
+  hitAudioClip: {fileID: 8300000, guid: 967c7850a39eb4fdca92d68ce39b7910, type: 3}
+  deathAudioClip: {fileID: 8300000, guid: 2fd18f819934e4c7f85baeabdf57777b, type: 3}
   invulnerableTime: 1.5
   canBeDamaged: 1
   invulnerabilityColor: {r: 1, g: 1, b: 1, a: 0.528}

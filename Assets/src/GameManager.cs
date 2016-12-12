@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.Audio;
 
 public class GameManager : MonoBehaviour {
 
@@ -17,6 +18,7 @@ public class GameManager : MonoBehaviour {
 
 	public GameObject gameOverUIHolder;
 	public Text scoreText;
+	public static AudioSource audioSource;
 
 	static Vector3 lastPlayerPosition;
 	static bool playerIsAlive = true;
@@ -25,8 +27,12 @@ public class GameManager : MonoBehaviour {
 	void Start () {
 		GetEntitiesHolder ();
 		player = Instantiate(playerPrefab, transform).GetComponent<Player>();
+		audioSource = GetComponent<AudioSource> ();
+
+		//cursor
 		CursorMode mode = CursorMode.Auto;
 		Cursor.SetCursor(cursorTexture, new Vector2(cursorTexture.width/2, cursorTexture.height/2), mode);
+
 	}
 
 	void Update (){
@@ -80,6 +86,10 @@ public class GameManager : MonoBehaviour {
 	public static void AddTombstone(Tombstone tombstone){
 		tombstones = tombstones == null ? new ArrayList() : tombstones;
 		tombstones.Add(tombstone);
+	}
+
+	public static void PlayAudioOneShot (AudioClip clip) {
+		audioSource.PlayOneShot (clip);
 	}
 
 	IEnumerator EnemySpawnCooldown (){

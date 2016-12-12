@@ -18,17 +18,14 @@ public class Character : MonoBehaviour {
 	protected bool canMove = true;
 
 	public SpriteRenderer spriteRenderer;
+	public AudioClip hitAudioClip, deathAudioClip;
 
+	//invunelaribity
 	public float invulnerableTime;
-
 	public bool canBeDamaged = true;
-
 	public Color invulnerabilityColor;
-
 	public bool hasInvulnerability;
-
 	public float hitFeedbackTime;
-
 	protected bool isHit = false;
 
 	// Use this for initialization
@@ -55,17 +52,18 @@ public class Character : MonoBehaviour {
 		if (canBeDamaged) {
 			life -= hit.damage;
 
-			if(hitParticle != null)
-				Instantiate (hitParticle, transform.position, Quaternion.identity);
-		
+			//vulnerability
 			if (hasInvulnerability) {
 				StartCoroutine (Invulnerability ());
 			}
-
 			StartCoroutine (HitFeedback ());
             
-		}
+			//FX
+			if(hitParticle != null)
+				Instantiate (hitParticle, transform.position, Quaternion.identity);
+			GameManager.PlayAudioOneShot (life <= 0 ? deathAudioClip : hitAudioClip);
 
+		}
 	}
 
 	protected void HandleOrientation (Vector2 oriDirection){
