@@ -18,7 +18,6 @@ public class GameManager : MonoBehaviour {
 
 	public LevelManager levelManager;
 	public GameObject gameOverUIHolder;
-	public Text scoreText;
 	public static AudioSource audioSource;
 
 	public Texture2D cursorTexture;
