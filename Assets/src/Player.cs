@@ -6,28 +6,25 @@ public class Player : Character {
 
 	public GameObject aim;
 
-	Animator meleeAnimator;
+	MeleeAnimator meleeAnimator;
 	bool hasJoystickInput;
 	public float dashSpeed;
 	bool canDash = true;
 	public float dashCooldown;
 	public float dashDuration;
 
-	// Use this for initialization
 	void Start () {
 		this.InitCharacter ();
-		meleeAnimator = GameObject.Find ("MeleeEffect").GetComponent<Animator>() as Animator;
+		meleeAnimator = GetComponentInChildren<MeleeAnimator> ();
 	}
 
-	// Update is called once per frame
 	void Update () {
 		hasJoystickInput = (Input.GetAxis ("HorizontalAim") != 0 || Input.GetAxis ("VerticalAim") != 0);
 		this.SetMoveDirection (new Vector2 (Input.GetAxis ("Horizontal"), Input.GetAxis ("Vertical")));
 		this.HandleMovement ();
 		this.HandleAim ();
 		this.HandleOrientation (aim.transform.up);
-		this.HandleAttack ();
-		this.HandleDashInput ();
+		this.HandleInput ();
 	}
 
 	void HandleAim () {
@@ -44,17 +41,21 @@ public class Player : Character {
 			float angle = (Mathf.Atan2(mouse_pos.y, mouse_pos.x) * Mathf.Rad2Deg)-90;
 			aim.transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle));
 		}
+
 	}
 
-	void HandleAttack() {
+	void HandleInput() {
 		isMeleeAttacking = false;
+
+		if (meleeAnimator.isAimLocked && meleeWeapon.ready) {
+			meleeAnimator.Unlock();
+		}
 
 		if (animator.GetBool("attack")){
 			animator.SetBool("attack",false);
 		}
-		if (meleeAnimator.GetBool ("attack")) {
-			meleeAnimator.SetBool ("attack", false);
-		}
+
+		meleeAnimator.CheckAttackAnimation ();
 
 		if (Input.GetButtonDown ("Fire2") && meleeWeapon.ready) {
 			animator.SetBool ("attack", true);
@@ -66,6 +67,11 @@ public class Player : Character {
 			animator.SetBool ("attack", true);
 			rangedWeapon.Attack (transform.position, aim.transform.up);
 		}
+			
+		if((Input.GetButton("Dash") || Input.GetAxis("Dash") > 0 ) && canDash){
+			StartCoroutine (Dash ());
+			StartCoroutine (EnterDashCooldown ());
+		}
 	}
 
 	public bool IsMeleeAttacking() {
@@ -74,15 +80,6 @@ public class Player : Character {
 			return true;
 		}
 		return false;
-	}
-
-	void HandleDashInput() {
-
-		if (Input.GetKeyDown (KeyCode.LeftShift) && canDash) {
-			StartCoroutine(Dash());
-			StartCoroutine (EnterDashCooldown ());
-		}
-
 	}
 
 	IEnumerator Dash() {

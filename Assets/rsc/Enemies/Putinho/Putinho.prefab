@@ -135,9 +135,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6015b09485d66493f8153f980534aeba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  life: 10
+  life: 2
   speed: 10
-  meleeWeapon: {fileID: 114383245760894346, guid: 060b072e364b74654903b466e8b10547,
+  meleeWeapon: {fileID: 114383245760894346, guid: 9cb8855a509b24704aabebe80af06926,
     type: 2}
   rangedWeapon: {fileID: 114311536146469756, guid: 438b68e2d31bb4d5bbb469093aeaef7f,
     type: 2}
@@ -145,9 +145,11 @@ MonoBehaviour:
     type: 2}
   animator: {fileID: 95033374740828898}
   spriteRenderer: {fileID: 212889185849379978}
-  invulnerableTime: 0
+  invulnerableTime: 5
   canBeDamaged: 1
-  invulnerabilityColor: {r: 1, g: 1, b: 1, a: 0.672}
+  invulnerabilityColor: {r: 1, g: 1, b: 1, a: 0.503}
+  hasInvulnerability: 0
+  hitFeedbackTime: 0.25
 --- !u!212 &212889185849379978
 SpriteRenderer:
   m_ObjectHideFlags: 1
