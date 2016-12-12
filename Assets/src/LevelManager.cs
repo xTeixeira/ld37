@@ -7,21 +7,41 @@ public class LevelManager : MonoBehaviour {
 	public Sprite[] tiles;
 	public GameObject[] fences;
 	public GameObject[] tombstones;
-	public Vector2 roomSize;
-	public Vector2 tombstonesRandomRange;
+	public Vector2 minRoomSize;
+	public Vector2 maxRoomSize;
+	Vector2 roomSize;
+	int tombstonesNumber;
 
-	public GameObject tilesHolder;
-	public GameObject assetsHolder;
+	GameObject tilesHolder;
+	GameObject assetsHolder;
 
 	private int tileUnitSize = 3;
 
-	void Start () {
+	public void CreateLevel () {
+
+		roomSize = new Vector2 (Random.Range ((int) minRoomSize.x, (int) maxRoomSize.x), 
+								Random.Range ((int) minRoomSize.y, (int) maxRoomSize.y));
+		tombstonesNumber = Random.Range (3, (int) (roomSize.x + roomSize.y) / 2 );
+
+		CreateHolders ();
 		CreateTiles ();
 		CreateFences ();
 		CreateTombstones ();
 
 		assetsHolder.transform.Translate (Vector3.left * roomSize.x * tileUnitSize);
 		assetsHolder.transform.Translate (Vector3.down * roomSize.y * tileUnitSize);
+	}
+
+	public void DestroyLevel () {
+		Destroy (tilesHolder);
+		Destroy (assetsHolder);
+	}
+
+	void CreateHolders () {
+		tilesHolder = new GameObject ("TilesHolder");
+		tilesHolder.transform.SetParent (transform.parent);
+		assetsHolder = new GameObject ("AssetsHolder");
+		assetsHolder.transform.SetParent (transform.parent);
 	}
 	
 	void CreateTiles (){
@@ -63,7 +83,6 @@ public class LevelManager : MonoBehaviour {
 	}
 
 	void CreateTombstones (){
-		int tombstonesNumber = Random.Range ((int) tombstonesRandomRange.x, (int) tombstonesRandomRange.y);
 		int[,] tombstonesArray = new int[(int)roomSize.x, (int)roomSize.y];
 
 		for (int i = 0; i < tombstonesNumber; i++) {
