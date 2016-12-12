@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour {
 
@@ -15,6 +16,7 @@ public class GameManager : MonoBehaviour {
 	public Texture2D cursorTexture;
 
 	public GameObject gameOverUIHolder;
+	public Text scoreText;
 
 	static Vector3 lastPlayerPosition;
 	static bool playerIsAlive = true;
@@ -47,6 +49,7 @@ public class GameManager : MonoBehaviour {
 				playerIsAlive = false;
 				lastPlayerPosition = player.transform.position;
 				Camera.main.transform.SetParent (null);
+				scoreText.text = playerScore.ToString();
 				gameOverUIHolder.SetActive (true);
 				Destroy (player.gameObject);
 			}
@@ -60,6 +63,7 @@ public class GameManager : MonoBehaviour {
 		playerIsAlive = true;
 		KillAllEnemies ();
 		GetEntitiesHolder ();
+		playerScore = 0;
 	}
 
 	public static Vector3 GetPlayerPosition(){

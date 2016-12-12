@@ -16,14 +16,11 @@ public class Bob : Character {
 	public float timeStoppedMin = 1.0f;
 	public float timeStoppedMax = 6.0f;
 
-	// Use this for initialization
 	void Start () {
 		this.InitCharacter ();
 	}
 	
-	// Update is called once per frame
 	void Update () {
-		
 		HandleAI();
 		HandleMovement ();
 		HandleLife ();
@@ -51,8 +48,10 @@ public class Bob : Character {
 	}
 
 	void HandleLife(){
-		if (this.life <= 0)
-			Destroy (gameObject);
+		if (this.life <= 0) {
+			GameManager.AddScore (15);
+			Kill ();
+		}
 	}
 		
 	IEnumerator whaitForNextWaypoint (float secondsMoving, float secondsStopped)
@@ -68,7 +67,7 @@ public class Bob : Character {
 		yield return new WaitForSeconds (seconds);
 	}
 
-	void OnTriggerEnter2D(Collider2D col){
+	void OnCollisionEnter2D(Collision2D col){
 		if (col.gameObject.CompareTag ("Player")) {
 			if (!isMeleeAttacking) {
 				GameManager.SendPlayerHit (meleeWeapon.GetHitInfo ());

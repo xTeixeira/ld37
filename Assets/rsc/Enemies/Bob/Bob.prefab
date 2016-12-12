@@ -102,7 +102,7 @@ CircleCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_UsedByEffector: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
@@ -137,7 +137,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   life: 2
   speed: 3
-  meleeWeapon: {fileID: 114383245760894346, guid: 060b072e364b74654903b466e8b10547,
+  meleeWeapon: {fileID: 114246628797308784, guid: 1910ecf1155494a1aa74b6c423afe7c7,
     type: 2}
   rangedWeapon: {fileID: 114508394213208614, guid: f74fa4bd3e3484549b2a9fd73eb4de3a,
     type: 2}

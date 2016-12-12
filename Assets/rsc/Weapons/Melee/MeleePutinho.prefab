@@ -21,7 +21,7 @@ GameObject:
   - component: {fileID: 4792497089231770}
   - component: {fileID: 114383245760894346}
   m_Layer: 0
-  m_Name: PutinhoWeapon
+  m_Name: MeleePutinho
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

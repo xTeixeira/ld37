@@ -9,11 +9,8 @@ public class Putinho : Character {
 
 	Vector2 direction;
 
-	bool isSpawning;
-
 	void Start () {
 		this.InitCharacter ();
-		StartCoroutine (SpawnAnimation ());
 	}
 	
 	void Update () {
@@ -32,9 +29,7 @@ public class Putinho : Character {
 		float playerDistance = Vector3.Distance(transform.position, playerPosition);
 
 		Color color = spriteRenderer.color;
-		if (isSpawning) {
-			color.a += 0.2f;
-		} else if (!isHit) {
+		if (!isHit) {
 			color.a = playerDistance * 0.15f;
 		}
 		spriteRenderer.color = color;
@@ -44,7 +39,7 @@ public class Putinho : Character {
 	void HandleLife(){
 		if (this.life <= 0) {
 			GameManager.AddScore (10);
-			Destroy (gameObject);
+			Kill ();
 		}
 	}
 
@@ -53,13 +48,7 @@ public class Putinho : Character {
 		Destroy (gameObject);
 	}
 
-	IEnumerator SpawnAnimation (){
-		isSpawning = true;
-		this.canMove = false;
-		yield return new WaitForSeconds (0.2f);
-		isSpawning = false;
-		this.canMove = true;
-	}
+
 
 	void OnTriggerEnter2D(Collider2D col){
 		if (col.gameObject.CompareTag ("Player")) {
