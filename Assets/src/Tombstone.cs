@@ -12,18 +12,14 @@ public class Tombstone : MonoBehaviour {
 		
 	}
 
-	public void SpawnEnemy(GameObject enemy){
+	public void SpawnEnemy(GameObject enemy, Transform parent){
 		hole.GetComponent<Animator> ().Play("Spawning");
 		spawnEffect.GetComponent<Animator> ().Play("Spawning");
-		StartCoroutine (SpawnEnemyDelayed (enemy));
+		StartCoroutine (SpawnEnemyDelayed (enemy, parent));
 	}
 
-	void Update (){
-		
-	}
-
-	IEnumerator SpawnEnemyDelayed(GameObject enemy){
+	IEnumerator SpawnEnemyDelayed(GameObject enemy, Transform parent){
 		yield return new WaitForSeconds (0.5f);
-		Instantiate (enemy, spawnPoint.transform.position, transform.rotation);
+		Instantiate (enemy, spawnPoint.transform.position, transform.rotation).transform.SetParent(parent);
 	}
 }

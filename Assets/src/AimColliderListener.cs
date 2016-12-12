@@ -9,7 +9,7 @@ public class AimColliderListener : MonoBehaviour {
 
 	void Update() {
 		player = player == null ? GameManager.GetPlayer() : player;
-		if (player.IsMeleeAttacking ()) {
+		if (player != null && player.IsMeleeAttacking ()) {
 			foreach (Character enemy in enemies){
 				if (enemy != null) {
 					enemy.SendHit (player.GetCurrentHitInfo ());

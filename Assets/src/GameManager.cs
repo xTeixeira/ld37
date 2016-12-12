@@ -6,30 +6,67 @@ public class GameManager : MonoBehaviour {
 
 	public static Player player;
 	public static ArrayList tombstones;
+	public static GameObject entitiesHolder;
 
-
+	public GameObject playerPrefab;
 	public GameObject[] enemies;
 	public float enemiesPerMinute;
 	bool canSpawnEnemy = true;
 	public Texture2D cursorTexture;
 
+	public GameObject gameOverUIHolder;
+
+	static Vector3 lastPlayerPosition;
+	static bool playerIsAlive = true;
+	public static int playerScore;
+
 	void Start () {
-		player = player == null ? GameObject.Find ("Player").GetComponent<Player>() : player;
+		GetEntitiesHolder ();
+		player = Instantiate(playerPrefab, transform).GetComponent<Player>();
 		CursorMode mode = CursorMode.Auto;
 		Cursor.SetCursor(cursorTexture, new Vector2(cursorTexture.width/2, cursorTexture.height/2), mode);
 	}
 
 	void Update (){
+		HandleEnemySpawn ();
+		HandleGameOver ();
+	}
+
+	void HandleEnemySpawn () {
+		entitiesHolder = entitiesHolder == null ? GetEntitiesHolder () : entitiesHolder;
 		if (canSpawnEnemy) {
 			((Tombstone) tombstones [Random.Range (0, tombstones.Count)]).
-							SpawnEnemy (enemies[Random.Range (0, enemies.Length)]);
+			SpawnEnemy (enemies[Random.Range (0, enemies.Length)], entitiesHolder.transform);
 			StartCoroutine (EnemySpawnCooldown ());
 		}
 	}
 
+	void HandleGameOver () {
+		if (playerIsAlive) {
+			if (player.life <= 0) {
+				playerIsAlive = false;
+				lastPlayerPosition = player.transform.position;
+				Camera.main.transform.SetParent (null);
+				gameOverUIHolder.SetActive (true);
+				Destroy (player.gameObject);
+			}
+		}
+	}
+
+	public void UIRetry () {
+		Destroy (Camera.main.gameObject);
+		player = Instantiate (playerPrefab, transform).GetComponent<Player>() as Player;
+		gameOverUIHolder.SetActive(false);
+		playerIsAlive = true;
+		KillAllEnemies ();
+		GetEntitiesHolder ();
+	}
+
 	public static Vector3 GetPlayerPosition(){
-		player = player == null ? GameObject.Find ("Player").GetComponent<Player>() : player;
-		return player.gameObject.transform.position;
+		if (player == null)
+			return lastPlayerPosition;
+		else
+			return player.gameObject.transform.position;
 	}
 
 	public static void SendPlayerHit(HitInfo hitInfo){
@@ -48,7 +85,20 @@ public class GameManager : MonoBehaviour {
 		enemiesPerMinute++;
 	}
 
-	public static Player GetPlayer(){
+	static public GameObject GetEntitiesHolder () {
+		entitiesHolder = entitiesHolder == null ? new GameObject ("EntitiesHolder") : entitiesHolder;
+		return entitiesHolder;
+	}
+
+	void KillAllEnemies () {
+		Destroy(entitiesHolder.gameObject);
+	}
+
+	public static Player GetPlayer () {
 		return player;
+	}
+
+	public static void AddScore (int score) {
+		playerScore += score;
 	}
 }

@@ -42,8 +42,10 @@ public class Putinho : Character {
 	}
 
 	void HandleLife(){
-		if (this.life <= 0)
+		if (this.life <= 0) {
+			GameManager.AddScore (10);
 			Destroy (gameObject);
+		}
 	}
 
 	IEnumerator DeathFade (){

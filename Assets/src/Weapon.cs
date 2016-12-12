@@ -36,8 +36,9 @@ public class Weapon : MonoBehaviour {
 	}
 
 	void CreateProjectile(Vector3 origin, Vector3 direction){
-		Instantiate (projectile, origin, transform.rotation).
-		GetComponent<Projectile>().InitProjectile(direction, projectileVelocity, GetHitInfo());
+		GameObject project = Instantiate (projectile, origin, transform.rotation) as GameObject;
+		project.GetComponent<Projectile>().InitProjectile(direction, projectileVelocity, GetHitInfo());
+		project.transform.SetParent (GameManager.GetEntitiesHolder ().transform);
 	}
 
 	IEnumerator AttackCooldown(){
