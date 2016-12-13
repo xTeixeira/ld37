@@ -11,10 +11,12 @@ public class GameManager : MonoBehaviour {
 	public static GameObject entitiesHolder;
 
 	public GameObject[] enemies;
-	public float enemiesPerMinute;
-	public float enemiesPerMinuteIncreaseRate;
+	public float enemiesPerMinuteStart;
+	public float enemiesAddPerWave;
+	public float enemyWaveTime;
 	float enemiesSpawnRate;
 	bool canSpawnEnemy = true;
+	int wave = 1;
 
 	public LevelManager levelManager;
 	public GameObject gameOverUIHolder;
@@ -30,6 +32,7 @@ public class GameManager : MonoBehaviour {
 	static bool playerIsAlive = true;
 	bool isInGame = false;
 	public Text scoreText;
+	public Text waveText;
 
 	public static int playerScore;
 
@@ -48,6 +51,7 @@ public class GameManager : MonoBehaviour {
 			HandleEnemySpawn ();
 			HandleGameOver ();
 			lifeUI.fillAmount = player.life * 0.1f;
+			waveText.text = "Wave: " + wave.ToString();
 		}
 
 		if (Input.GetKey (KeyCode.Escape))
@@ -71,8 +75,11 @@ public class GameManager : MonoBehaviour {
 			GameObject.Find ("LevelManager").GetComponent<LevelManager>() : levelManager;
 		levelManager.CreateLevel ();
 		GetEntitiesHolder ();
-		enemiesSpawnRate = enemiesPerMinute;
+		enemiesSpawnRate = enemiesPerMinuteStart;
 		isInGame = true;
+		waveText.enabled = true;
+
+		StartCoroutine (WaitForEnemyWave ());
 	}
 
 	void HandleGameOver () {
@@ -84,6 +91,8 @@ public class GameManager : MonoBehaviour {
 				scoreText.text = playerScore.ToString();
 				gameOverUIHolder.SetActive (true);
 				Destroy (player.gameObject);
+				StopCoroutine (WaitForEnemyWave ());
+				StopCoroutine (EnemySpawnCooldown ());
 			}
 		}
 	}
@@ -98,7 +107,8 @@ public class GameManager : MonoBehaviour {
 		levelManager.CreateLevel ();
 		GetEntitiesHolder ();
 		playerScore = 0;
-		enemiesSpawnRate = enemiesPerMinute;
+		wave = 1;
+		enemiesSpawnRate = enemiesPerMinuteStart;
 	}
 
 	public void UIStartMenu () {
@@ -135,7 +145,6 @@ public class GameManager : MonoBehaviour {
 		canSpawnEnemy = false;
 		yield return new WaitForSeconds (60 / enemiesSpawnRate);
 		canSpawnEnemy = true;
-		enemiesSpawnRate += enemiesPerMinuteIncreaseRate;
 	}
 
 	static public GameObject GetEntitiesHolder () {
@@ -153,5 +162,12 @@ public class GameManager : MonoBehaviour {
 
 	public static void AddScore (int score) {
 		playerScore += score;
+	}
+
+	IEnumerator WaitForEnemyWave() {
+		yield return new WaitForSeconds (enemyWaveTime);
+		enemiesSpawnRate += enemiesAddPerWave;
+		wave++;
+		StartCoroutine (WaitForEnemyWave ());
 	}
 }
