@@ -59,7 +59,7 @@ public class Character : MonoBehaviour {
 			StartCoroutine (HitFeedback ());
             
 			//FX
-			if(hitParticle != null)
+			if(life <= 0 && hitParticle != null)
 				Instantiate (hitParticle, transform.position, Quaternion.identity);
 			GameManager.PlayAudioOneShot (life <= 0 ? deathAudioClip : hitAudioClip);
 

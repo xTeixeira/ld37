@@ -1,13 +1,13 @@
 fileFormatVersion: 2
-guid: 368b49a066a224d7185cc2bf540e2552
-timeCreated: 1481589829
+guid: 34158b234fae94b7391dfc5fb3ba611f
+timeCreated: 1481586946
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
-    21300000: Fogo sprite final_0
-    21300002: Fogo sprite final_1
-    21300004: Fogo sprite final_2
-    21300006: Fogo sprite final_3
+    21300000: Fogo vazio sprite_0
+    21300002: Fogo vazio sprite_1
+    21300004: Fogo vazio sprite_2
+    21300006: Fogo vazio sprite_3
   serializedVersion: 4
   mipmaps:
     mipMapMode: 0
@@ -32,7 +32,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     filterMode: -1
-    aniso: -1
+    aniso: 1
     mipBias: -1
     wrapMode: 1
   nPOTScale: 0
@@ -114,12 +114,12 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Fogo sprite final_0
+      name: Fogo vazio sprite_0
       rect:
         serializedVersion: 2
         x: 11
         y: 2
-        width: 87
+        width: 86
         height: 223
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -127,7 +127,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: Fogo sprite final_1
+      name: Fogo vazio sprite_1
       rect:
         serializedVersion: 2
         x: 109
@@ -140,7 +140,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: Fogo sprite final_2
+      name: Fogo vazio sprite_2
       rect:
         serializedVersion: 2
         x: 237
@@ -153,7 +153,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: Fogo sprite final_3
+      name: Fogo vazio sprite_3
       rect:
         serializedVersion: 2
         x: 361

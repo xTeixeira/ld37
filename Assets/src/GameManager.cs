@@ -18,6 +18,9 @@ public class GameManager : MonoBehaviour {
 
 	public LevelManager levelManager;
 	public GameObject gameOverUIHolder;
+	public GameObject menuUIHolder;
+	public GameObject mainMenuUIHolder;
+	public GameObject tutorialUIHolder;
 	public static AudioSource audioSource;
 
 	public Texture2D cursorTexture;
@@ -25,29 +28,30 @@ public class GameManager : MonoBehaviour {
 	public GameObject playerPrefab;
 	static Vector3 lastPlayerPosition;
 	static bool playerIsAlive = true;
+	bool isInGame = false;
 	public Text scoreText;
 
 	public static int playerScore;
 
-	void Start () {
-		player = Instantiate(playerPrefab, transform).GetComponent<Player>();
-		audioSource = GetComponent<AudioSource> ();
+	public Image lifeUI;
 
-		levelManager = levelManager == null ? 
-						GameObject.Find ("LevelManager").GetComponent<LevelManager>() : levelManager;
-		levelManager.CreateLevel ();
-		GetEntitiesHolder ();
-		enemiesSpawnRate = enemiesPerMinute;
+	void Start () {
+		mainMenuUIHolder.SetActive (true);
 
 		//cursor
 		CursorMode mode = CursorMode.Auto;
 		Cursor.SetCursor(cursorTexture, new Vector2(cursorTexture.width/2, cursorTexture.height/2), mode);
-
 	}
 
 	void Update (){
-		HandleEnemySpawn ();
-		HandleGameOver ();
+		if (isInGame) {
+			HandleEnemySpawn ();
+			HandleGameOver ();
+			lifeUI.fillAmount = player.life * 0.1f;
+		}
+
+		if (Input.GetKey (KeyCode.Escape))
+			Application.Quit ();
 	}
 
 	void HandleEnemySpawn () {
@@ -57,6 +61,18 @@ public class GameManager : MonoBehaviour {
 			SpawnEnemy (enemies[Random.Range (0, enemies.Length)], entitiesHolder.transform);
 			StartCoroutine (EnemySpawnCooldown ());
 		}
+	}
+
+	void StartGame () {
+		player = Instantiate(playerPrefab, transform).GetComponent<Player>();
+		audioSource = GetComponent<AudioSource> ();
+
+		levelManager = levelManager == null ? 
+			GameObject.Find ("LevelManager").GetComponent<LevelManager>() : levelManager;
+		levelManager.CreateLevel ();
+		GetEntitiesHolder ();
+		enemiesSpawnRate = enemiesPerMinute;
+		isInGame = true;
 	}
 
 	void HandleGameOver () {
@@ -83,6 +99,16 @@ public class GameManager : MonoBehaviour {
 		GetEntitiesHolder ();
 		playerScore = 0;
 		enemiesSpawnRate = enemiesPerMinute;
+	}
+
+	public void UIStartMenu () {
+		mainMenuUIHolder.SetActive (false);
+		tutorialUIHolder.SetActive (true);
+	}
+
+	public void UITutorialContinue () {
+		menuUIHolder.SetActive (false);
+		StartGame ();
 	}
 
 	public static Vector3 GetPlayerPosition(){
