@@ -1,15 +1,13 @@
 fileFormatVersion: 2
-guid: 33e93a731e75f4384a5d7be21db370ae
-timeCreated: 1481575161
+guid: c6f01431571f5447aa66ddb2f5f0f9f5
+timeCreated: 1481576838
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
-    21300000: Bob animacao 1_0
-    21300002: Bob animacao 1_1
-    21300004: Bob animacao 1_2
-    21300006: Bob animacao 1_3
-    21300008: Bob animacao 1_4
-    21300010: Bob animacao 1_5
+    21300000: putinho animacao_0
+    21300002: putinho animacao_1
+    21300004: putinho animacao_2
+    21300006: putinho animacao_3
   serializedVersion: 4
   mipmaps:
     mipMapMode: 0
@@ -76,80 +74,54 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Bob animacao 1_0
+      name: putinho animacao_0
       rect:
         serializedVersion: 2
         x: 0
-        y: 309
-        width: 380
-        height: 309
+        y: 335
+        width: 285
+        height: 335
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: Bob animacao 1_1
+      name: putinho animacao_1
       rect:
         serializedVersion: 2
-        x: 380
-        y: 309
-        width: 380
-        height: 309
+        x: 285
+        y: 335
+        width: 285
+        height: 335
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: Bob animacao 1_2
-      rect:
-        serializedVersion: 2
-        x: 760
-        y: 309
-        width: 380
-        height: 309
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      tessellationDetail: 0
-    - serializedVersion: 2
-      name: Bob animacao 1_3
+      name: putinho animacao_2
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 380
-        height: 309
+        width: 285
+        height: 335
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: Bob animacao 1_4
+      name: putinho animacao_3
       rect:
         serializedVersion: 2
-        x: 380
+        x: 285
         y: 0
-        width: 380
-        height: 309
+        width: 285
+        height: 335
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      tessellationDetail: 0
-    - serializedVersion: 2
-      name: Bob animacao 1_5
-      rect:
-        serializedVersion: 2
-        x: 760
-        y: 0
-        width: 380
-        height: 309
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       tessellationDetail: 0

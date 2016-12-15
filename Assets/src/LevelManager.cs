@@ -7,21 +7,48 @@ public class LevelManager : MonoBehaviour {
 	public Sprite[] tiles;
 	public GameObject[] fences;
 	public GameObject[] tombstones;
-	public Vector2 roomSize;
-	public Vector2 tombstonesRandomRange;
+	public GameObject stoneTile;
+	public Vector2 minRoomSize;
+	public Vector2 maxRoomSize;
+	Vector2 roomSize;
+	int tombstonesNumber;
+	int stonesNumber;
+	int[,] assetsArray;
 
-	public GameObject tilesHolder;
-	public GameObject assetsHolder;
+	GameObject tilesHolder;
+	GameObject assetsHolder;
 
 	private int tileUnitSize = 3;
 
-	void Start () {
+	public void CreateLevel () {
+
+		roomSize = new Vector2 (Random.Range ((int) minRoomSize.x, (int) maxRoomSize.x), 
+								Random.Range ((int) minRoomSize.y, (int) maxRoomSize.y));
+		tombstonesNumber = Random.Range (3, (int) (roomSize.x + roomSize.y) / 2 );
+		stonesNumber = Random.Range (1, (int) (roomSize.x + roomSize.y) / 2 );
+
+		assetsArray = new int[(int)roomSize.x, (int)roomSize.y];
+
+		CreateHolders ();
 		CreateTiles ();
 		CreateFences ();
 		CreateTombstones ();
+		CreateStones ();
 
 		assetsHolder.transform.Translate (Vector3.left * roomSize.x * tileUnitSize);
 		assetsHolder.transform.Translate (Vector3.down * roomSize.y * tileUnitSize);
+	}
+
+	public void DestroyLevel () {
+		Destroy (tilesHolder);
+		Destroy (assetsHolder);
+	}
+
+	void CreateHolders () {
+		tilesHolder = new GameObject ("TilesHolder");
+		tilesHolder.transform.SetParent (transform.parent);
+		assetsHolder = new GameObject ("AssetsHolder");
+		assetsHolder.transform.SetParent (transform.parent);
 	}
 	
 	void CreateTiles (){
@@ -63,21 +90,36 @@ public class LevelManager : MonoBehaviour {
 	}
 
 	void CreateTombstones (){
-		int tombstonesNumber = Random.Range ((int) tombstonesRandomRange.x, (int) tombstonesRandomRange.y);
-		int[,] tombstonesArray = new int[(int)roomSize.x, (int)roomSize.y];
 
 		for (int i = 0; i < tombstonesNumber; i++) {
 			int x = Mathf.RoundToInt(Random.Range (1, roomSize.x - 2));
 			int y = Mathf.RoundToInt(Random.Range (1, roomSize.y - 2));
 
-			if (tombstonesArray [x, y] == 0) {
+			if (assetsArray [x, y] == 0) {
 				GameObject tombstone = Instantiate (tombstones [Random.Range (0, 2)],
 					new Vector3 (x * 8, y * 8, 0),
 					                      Quaternion.identity);
 
 				tombstone.transform.SetParent (assetsHolder.transform);
-				tombstonesArray [x, y] = 1;
+				assetsArray [x, y] = 1;
 				GameManager.AddTombstone (tombstone.GetComponent<Tombstone>() as Tombstone);
+			}
+		}
+	}
+
+	void CreateStones (){
+
+		for (int i = 0; i < stonesNumber; i++) {
+			int x = Mathf.RoundToInt(Random.Range (1, roomSize.x - 2));
+			int y = Mathf.RoundToInt(Random.Range (1, roomSize.y - 2));
+
+			if (assetsArray [x, y] == 0) {
+				GameObject stone = Instantiate (stoneTile,
+					new Vector3 (x * 8, y * 8, 0),
+					Quaternion.identity);
+
+				stone.transform.SetParent (assetsHolder.transform);
+				assetsArray [x, y] = 1;
 			}
 		}
 	}

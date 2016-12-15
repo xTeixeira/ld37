@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.Audio;
 
 public class GameManager : MonoBehaviour {
 
@@ -9,38 +10,76 @@ public class GameManager : MonoBehaviour {
 	public static ArrayList tombstones;
 	public static GameObject entitiesHolder;
 
-	public GameObject playerPrefab;
 	public GameObject[] enemies;
-	public float enemiesPerMinute;
+	public float enemiesPerMinuteStart;
+	public float enemiesAddPerWave;
+	public float enemyWaveTime;
+	float enemiesSpawnRate;
 	bool canSpawnEnemy = true;
+	int wave = 1;
+
+	public LevelManager levelManager;
+	public GameObject gameOverUIHolder;
+	public GameObject menuUIHolder;
+	public GameObject mainMenuUIHolder;
+	public GameObject tutorialUIHolder;
+	public static AudioSource audioSource;
+
 	public Texture2D cursorTexture;
 
-	public GameObject gameOverUIHolder;
-	public Text scoreText;
-
+	public GameObject playerPrefab;
 	static Vector3 lastPlayerPosition;
 	static bool playerIsAlive = true;
+	bool isInGame = false;
+	public Text scoreText;
+	public Text waveText;
+
 	public static int playerScore;
 
+	public Image lifeUI;
+
 	void Start () {
-		GetEntitiesHolder ();
-		player = Instantiate(playerPrefab, transform).GetComponent<Player>();
+		mainMenuUIHolder.SetActive (true);
+
+		//cursor
 		CursorMode mode = CursorMode.Auto;
 		Cursor.SetCursor(cursorTexture, new Vector2(cursorTexture.width/2, cursorTexture.height/2), mode);
 	}
 
 	void Update (){
-		HandleEnemySpawn ();
-		HandleGameOver ();
+		if (isInGame) {
+			HandleEnemySpawn ();
+			HandleGameOver ();
+			lifeUI.fillAmount = player.life * 0.1f;
+			waveText.text = "Wave: " + wave.ToString();
+		}
+
+		if (Input.GetKey (KeyCode.Escape))
+			Application.Quit ();
 	}
 
 	void HandleEnemySpawn () {
 		entitiesHolder = entitiesHolder == null ? GetEntitiesHolder () : entitiesHolder;
-		if (canSpawnEnemy) {
+		if (canSpawnEnemy && tombstones.Count > 0) {
 			((Tombstone) tombstones [Random.Range (0, tombstones.Count)]).
 			SpawnEnemy (enemies[Random.Range (0, enemies.Length)], entitiesHolder.transform);
 			StartCoroutine (EnemySpawnCooldown ());
 		}
+	}
+
+	void StartGame () {
+		player = Instantiate(playerPrefab, transform).GetComponent<Player>();
+		audioSource = GetComponent<AudioSource> ();
+
+		levelManager = levelManager == null ? 
+			GameObject.Find ("LevelManager").GetComponent<LevelManager>() : levelManager;
+		levelManager.CreateLevel ();
+		GetEntitiesHolder ();
+		enemiesSpawnRate = enemiesPerMinuteStart;
+		isInGame = true;
+		waveText.enabled = true;
+
+		StartCoroutine (WaitForEnemyWave ());
 	}
 
 	void HandleGameOver () {
@@ -52,6 +91,8 @@ public class GameManager : MonoBehaviour {
 				scoreText.text = playerScore.ToString();
 				gameOverUIHolder.SetActive (true);
 				Destroy (player.gameObject);
+				StopCoroutine (WaitForEnemyWave ());
+				StopCoroutine (EnemySpawnCooldown ());
 			}
 		}
 	}
@@ -62,8 +103,22 @@ public class GameManager : MonoBehaviour {
 		gameOverUIHolder.SetActive(false);
 		playerIsAlive = true;
 		KillAllEnemies ();
+		levelManager.DestroyLevel ();
+		levelManager.CreateLevel ();
 		GetEntitiesHolder ();
 		playerScore = 0;
+		wave = 1;
+		enemiesSpawnRate = enemiesPerMinuteStart;
+	}
+
+	public void UIStartMenu () {
+		mainMenuUIHolder.SetActive (false);
+		tutorialUIHolder.SetActive (true);
+	}
+
+	public void UITutorialContinue () {
+		menuUIHolder.SetActive (false);
+		StartGame ();
 	}
 
 	public static Vector3 GetPlayerPosition(){
@@ -82,11 +137,14 @@ public class GameManager : MonoBehaviour {
 		tombstones.Add(tombstone);
 	}
 
+	public static void PlayAudioOneShot (AudioClip clip) {
+		audioSource.PlayOneShot (clip);
+	}
+
 	IEnumerator EnemySpawnCooldown (){
 		canSpawnEnemy = false;
-		yield return new WaitForSeconds (60 / enemiesPerMinute);
+		yield return new WaitForSeconds (60 / enemiesSpawnRate);
 		canSpawnEnemy = true;
-		enemiesPerMinute++;
 	}
 
 	static public GameObject GetEntitiesHolder () {
@@ -104,5 +162,12 @@ public class GameManager : MonoBehaviour {
 
 	public static void AddScore (int score) {
 		playerScore += score;
+	}
+
+	IEnumerator WaitForEnemyWave() {
+		yield return new WaitForSeconds (enemyWaveTime);
+		enemiesSpawnRate += enemiesAddPerWave;
+		wave++;
+		StartCoroutine (WaitForEnemyWave ());
 	}
 }
